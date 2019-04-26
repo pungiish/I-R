@@ -8,12 +8,16 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
+
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+
 namespace IDE.Properties
 {
 
 
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "11.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "15.8.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase
     {
 
@@ -24,6 +28,52 @@ namespace IDE.Properties
             get
             {
                 return defaultInstance;
+            }
+
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        public ObservableCollection<string> programskiJezik
+        {
+            get
+            {
+                return ((ObservableCollection<string>)(this["programskiJezik"]));
+            }
+            set
+            {
+                this["programskiJezik"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public ObservableCollection<KeyValuePair<string, string>> tipiProjektov
+        {
+            get
+            {
+                return ((ObservableCollection<KeyValuePair<string, string>>)(this["tipiProjektov"]));
+            }
+            set
+            {
+                this["tipiProjektov"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+
+        public ObservableCollection<string> ogrodja
+        {
+            get
+            {
+                return ((ObservableCollection<string>)(this["ogrodja"]));
+            }
+            set
+            {
+                this["ogrodja"] = value;
             }
         }
     }

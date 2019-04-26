@@ -1,12 +1,108 @@
-﻿<Window x:Class="IDE.MainWindow"
+<Window x:Class="IDE.MainWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:self="clr-namespace:Hierarhija"
         xmlns:local="clr-namespace:IDE"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
+        Title="MainWindow" Height="800" Width="1200">
+    
+    <Window.Resources>
+        <HierarchicalDataTemplate DataType="{x:Type self:Hierarhija}"
+                                  ItemsSource="{Binding Items}">
+            <TextBlock Text="{Binding Path=Title}" ToolTip="{Binding Path=Title}" />
+        </HierarchicalDataTemplate>
+        <Style x:Key="TextBoxStyle" TargetType="TextBox">
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding Metode.metoda}" Value="True">
+                    <Setter Property="TextBox.Background" Value="Yellow"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+  
+    <Grid Name="grid1">
         
+        <DockPanel>
+            <StackPanel DockPanel.Dock="Top">
+                <DockPanel Width="auto">
+                    <Menu IsMainMenu="True">
+                        <MenuItem Header="_Datoteka">
+                            <MenuItem Header="_Odpri Projekt" Click="Dodaj_Projekt" />
+                            <MenuItem Header="_Nov Projekt" Click="Nov_Projekt" />
+                            <MenuItem Header="_Shrani.." Click="Shrani_Datoteko" />
+                            <MenuItem Header="_Odpri.." Click="Odpri_Datoteko" />
+                            <MenuItem Header="_Izbriši Projekt" Click="Izbriši_Projekt" />
+                            <MenuItem Header="_Dodaj_Datoteko" Click="Dodaj_Datoteko" />
+                            <MenuItem Header="_Odstrani_Datoteko" Click="Odstrani_Datoteko" />
+                            <MenuItem Header="_Izhod" Click="Izhod_Click"/>
+                        </MenuItem>
+                        <MenuItem Header="_Pogled" />
+                        <MenuItem Header="_Orodja">
+                            <MenuItem Header="_Nastavitve" Click="MenuItem_Click"/>
+                        </MenuItem>
+                    </Menu>
+                </DockPanel>
+                <DockPanel Height="auto" Width="auto">
+                    <ToolBarTray DockPanel.Dock="Top">
+                        <ToolBar>
+                            <Button Command="Cut">
+                                <Image Source="/Slike/cut.png" Width="15"/>
+                            </Button>
+                            <Button Command="Copy">
+                                <Image Source="/Slike/copy.png" Width="15"/>
+                            </Button>
+                            <Button Command="Paste">
+                                <Image Source="/Slike/paste.png" Width="15"/>
+                            </Button>
+                            <Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <Image Source="/Slike/play.png" Width="15"/>
+                                    <TextBlock Text=" Start" FontSize="10" />
+                                </StackPanel>
+                            </Button>
+                        </ToolBar>
+                    </ToolBarTray>
+                </DockPanel>
+            </StackPanel>
+            <DockPanel>
+                <Expander Name="expander" ExpandDirection="Right" IsEnabled="{Binding}" VerticalAlignment="Top" VerticalContentAlignment="Stretch" MaxWidth="150">
+                    <Expander.Header>
+                        <Label Content="Solution Explorer">
+                            <Label.LayoutTransform>
+                                <RotateTransform Angle="270"/>
+                            </Label.LayoutTransform>
+                        </Label>
+                    </Expander.Header>
+                <TreeView ItemsSource="{Binding}" Name="strukturaProjekta" DockPanel.Dock="Left" GotFocus="strukturaProjekta_GotFocus">
+                </TreeView>
+                </Expander>
+                <Expander Name="expander2" ExpandDirection="Left" IsEnabled="{Binding}" VerticalAlignment="Top" VerticalContentAlignment="Stretch" DockPanel.Dock="Right">
+                    <Expander.Header>
+                        <Label Content="Solution Explorer">
+                            <Label.LayoutTransform>
+                                <RotateTransform Angle="270"/>
+                            </Label.LayoutTransform>
+                        </Label> 
+                    </Expander.Header>
+                <ListView ItemsSource="{Binding}"  Name="metode" DockPanel.Dock="Right">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                        <WrapPanel>
+                            <TextBlock Text="{Binding}"/>
+                        </WrapPanel>
+                    </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                </Expander>
+                <StatusBar DockPanel.Dock="Bottom">
+                    <StatusBarItem>
+                        <TextBlock Name="lblCursorPosition" />
+                    </StatusBarItem>
+                </StatusBar>
+                <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" SelectionChanged="txtEditor_SelectionChanged"/>
+            </DockPanel>
+        </DockPanel>
     </Grid>
 </Window>
