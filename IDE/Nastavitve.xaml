@@ -84,10 +84,6 @@
                     <CheckBox  x:Name="shrani" Content="Shrani" IsChecked="True" Checked="CheckBox_Checked"
             Unchecked="CheckBox_Unchecked">
                     </CheckBox>
-                    <StackPanel Orientation="Horizontal">
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left">Dodaj</Button>
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0">Odstrani</Button>
-                    </StackPanel>
                 </DockPanel>
             </TabItem>
         </TabControl>
