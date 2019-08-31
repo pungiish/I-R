@@ -14,21 +14,15 @@
                         <MenuItem Header="_Datoteka">
                             <MenuItem Header="_Odpri Projekt"  />
                             <MenuItem Header="_Nov Projekt" Click="MenuItem_Click_NovProjekt"  />
-                            <!--Click="Dodaj_Projekt"-->
                             <MenuItem Header="_Hitro Ustvari Projekt" Click="MenuItem_Click_UstvariProjekt"  />
                             <MenuItem Header="_Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
-                            <!--Click="Shrani_Datoteko"-->
                             <MenuItem Header="_Dodaj_Datoteko" Click="MenuItem_Click_DodajDatoteko"  />
-                            <!--Click="Dodaj_Datoteko"-->
                             <MenuItem Header="_Odstrani_Datoteko" Click="MenuItem_Click_OdstraniDatoteko"  />
-                            <!--Click="Odstrani_Datoteko"-->
                             <MenuItem Header="_Izhod" />
-                            <!--Click="Izhod_Click"-->
                         </MenuItem>
                         <MenuItem Header="_Pogled" />
                         <MenuItem Header="_Orodja">
                             <MenuItem Header="_Nastavitve" Click="MenuItem_Click_OdpriNastavitve"/>
-                            <!--Click="MenuItem_Click"-->
                         </MenuItem>
                     </Menu>
                 </DockPanel>
