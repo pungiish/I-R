@@ -396,6 +396,8 @@ namespace IDE
                 if (name.Contains(".cs"))
                 {
                     this.listView.Items.Add(new MyItem { Id = 1, Metoda = "strukturaProjekta_SelectedItemChanged()" });
+                    this.listView.Items.Add(new MyItem { Id = 2, Metoda = " MenuItem_Click_DodajDatoteko()" });
+
 
                 }
             }
@@ -417,6 +419,24 @@ namespace IDE
             }
             else
                 strukturaProjekta.Items.Remove(strukturaProjekta.SelectedItem);
+        }
+
+        private void listView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                txtEditor.Document.Blocks.Clear();
+                MyItem myItem = (MyItem)item;
+                if (myItem.Id == 1)
+                {
+                    txtEditor.AppendText($" listView.Items.Clear(); var item = (e.NewValue as TreeViewItem);strukturaProjekta.Tag = item if (item.Items.Count == 0");
+                }
+                if (myItem.Id == 2)
+                {
+                    txtEditor.AppendText($"var item = (sender as ListView).SelectedItem;" + "if (item != null)");
+                }
+            }
         }
     }
 

@@ -62,7 +62,7 @@
                 <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="strukturaProjekta_SelectedItemChanged">
                     <!--GotFocus="strukturaProjekta_GotFocus"-->
                 </TreeView>
-                <ListView x:Name="listView" DockPanel.Dock="Right">
+                <ListView x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="listView_PreviewMouseLeftButtonUp">
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Method" DisplayMemberBinding="{Binding Metoda}" Width="Auto"/>
