@@ -401,7 +401,7 @@ namespace IDE
                 string name = item.Header.ToString();
                 if (name.Contains(".cs"))
                 {
-                    this.listView.Items.Add(new MyItem { Id = 1, Metoda = "private void strukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)" });
+                    this.listView.Items.Add(new MyItem { Id = 1, Metoda = "strukturaProjekta_SelectedItemChanged()" });
 
                 }
             }

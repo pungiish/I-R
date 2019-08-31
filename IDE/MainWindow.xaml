@@ -65,8 +65,7 @@
                 <ListView x:Name="listView" DockPanel.Dock="Right">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
-                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Metoda}"/>
+                            <GridViewColumn Header="Method" DisplayMemberBinding="{Binding Metoda}" Width="Auto"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
