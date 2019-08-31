@@ -13,5 +13,14 @@ namespace IDE
     /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            if (IDE.Properties.Settings.Default.CustomSettings == null)
+            {
+                IDE.Properties.Settings.Default.CustomSettings = new IDE.Settings();
+            }
+        }
     }
 }

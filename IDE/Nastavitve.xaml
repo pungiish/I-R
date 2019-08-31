@@ -60,7 +60,20 @@
             <TabItem Header="Ogrodja">
                 <DockPanel>
                     <TextBox Name="txtBox1" DockPanel.Dock="Top" Text="Vnesi željeno ogrodje."></TextBox>
-                    <ListBox Name="ogrodja"  DockPanel.Dock="Top"></ListBox>
+                    <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+                        <Button Name="btnAddOgrodje" Click="btnAddOgrodje_Click">Add Framework</Button>
+                        <Button Name="btnChageOgrodje" Click="btnChangeOgrodje_Click" Margin="0,5">Change Framework</Button>
+                        <Button Name="btnDeleteOgrodje" Click="btnDeleteOgrodje_Click">Delete Framework</Button>
+                    </StackPanel>
+                    <Grid>
+                        <ListView  Name="ogrodja" ItemsSource="{Binding ogrodjas}">
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn Header="Ogrodja" DisplayMemberBinding="{Binding Name}" Width="700"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                     <!--ItemsSource="{Binding Ogrodjas}"-->
                     <StackPanel Orientation="Horizontal">
                         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click_3">Dodaj</Button>

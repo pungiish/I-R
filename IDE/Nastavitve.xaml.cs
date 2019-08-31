@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -23,7 +23,7 @@ namespace IDE
         public Settings settings = new Settings();
 
         public Nastavitve()
-        {   
+        {
 
 
             //Ogrodjas = new ObservableCollection<string>();
@@ -44,8 +44,15 @@ namespace IDE
             //_tipiProjektov = TipiProjektov.ToArray();
             //projectList = new ObservableCollection<KeyValuePair<string, string>>(_tipiProjektov);
             InitializeComponent();
-            settings.programskiJezik.Add(new ProgramskiJezik("c++", new string[] { "tip1", "tip2" }, new string[] { "ogrodje1" }));
-            settings.programskiJezik.Add(new ProgramskiJezik("c", new string[] { "tip1" }, new string[] { "ogrodje1" }));
+            if (Properties.Settings.Default.CustomSettings.programskiJezik.Count == 0)
+            {
+
+                settings.programskiJezik.Add(new ProgramskiJezik("c++", new string[] { "tip1", "tip2" }));
+                settings.programskiJezik.Add(new ProgramskiJezik("c", new string[] { "tip1" }));
+                settings.ogrodjas.Add(new Ogrodje("WPF APP"));
+            }
+            else
+                settings = Properties.Settings.Default.CustomSettings;
             DataContext = settings;
             //DataContext = this;
             //ogrodja.ItemsSource = Ogrodjas;
@@ -53,20 +60,38 @@ namespace IDE
         }
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            settings.programskiJezik.Add(new ProgramskiJezik(txtBox.Text, new string[] { "tip5", "tip6" }, new string[] { "ogrodje3" }));
+            settings.programskiJezik.Add(new ProgramskiJezik(txtBox.Text, new string[] { "tip5", "tip6" }));
         }
 
         private void btnChangeUser_Click(object sender, RoutedEventArgs e)
         {
-            if(programskiJeziki.SelectedItem != null)
+            if (programskiJeziki.SelectedItem != null)
                 (programskiJeziki.SelectedItem as ProgramskiJezik).Name = txtBox.Text;
         }
 
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
             if (programskiJeziki.SelectedItem != null)
+            {
                 settings.programskiJezik.Remove(programskiJeziki.SelectedItem as ProgramskiJezik);
-            this.tipi1.Items.Clear();
+                tipi1.ItemsSource = null;
+            }
+        }
+        private void btnAddOgrodje_Click(object sender, RoutedEventArgs e)
+        {
+            settings.ogrodjas.Add(new Ogrodje(txtBox1.Text));
+        }
+
+        private void btnChangeOgrodje_Click(object sender, RoutedEventArgs e)
+        {
+            if (ogrodja.SelectedItem != null)
+                (ogrodja.SelectedItem as Ogrodje).Name = txtBox1.Text;
+        }
+
+        private void btnDeleteOgrodje_Click(object sender, RoutedEventArgs e)
+        {
+            if (ogrodja.SelectedItem != null)
+                settings.ogrodjas.Remove(ogrodja.SelectedItem as Ogrodje);
         }
         private void Inicializiraj_Tipe_Projektov()
         {
@@ -169,6 +194,9 @@ namespace IDE
         }
         void DataWindow_Closing(object sender, CancelEventArgs e)
         {
+            Properties.Settings.Default.CustomSettings = settings;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
             //Properties.Settings.Default.tipiProjektov = projectList;
 
         }
@@ -188,7 +216,7 @@ namespace IDE
 
         }
 
-        
+
         private void tipi_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var item = (sender as ListView).SelectedItem;
@@ -199,85 +227,75 @@ namespace IDE
             }
         }
     }
-
-}
-public class User : INotifyPropertyChanged
-{
-    private string name;
-    public string Name
+    [Serializable]
+    public class ProgramskiJezik
     {
-        get { return this.name; }
-        set
+        private string name;
+        public string[] tip { get; set; }
+
+        public ProgramskiJezik(string name, string[] tip)
         {
-            if (this.name != value)
+            this.name = name;
+            this.tip = tip;
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+            set
             {
-                this.name = value;
-                this.NotifyPropertyChanged("Name");
+                if (this.name != value)
+                {
+                    this.name = value;
+                }
+            }
+        }
+    }
+    [Serializable]
+    public class Ogrodje
+    {
+        private string name;
+
+        public Ogrodje(string name)
+        {
+            this.name = name;
+        }
+
+        public string Name
+        {
+            get { return this.name; }
+            set
+            {
+                if (this.name != value)
+                {
+                    this.name = value;
+                }
             }
         }
     }
 
-    public event PropertyChangedEventHandler PropertyChanged;
-
-    public void NotifyPropertyChanged(string propName)
+    [Serializable]
+    public class Settings
     {
-        if (this.PropertyChanged != null)
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-    }
-}
-
-public class ProgramskiJezik : INotifyPropertyChanged
-{
-    private string name;
-    public string[] tip { get; set; }
-    public string[] ogrodja { get; set; }
-
-    public ProgramskiJezik(string name, string[] tip, string[] ogrodja)
-    {
-        this.name = name;
-        this.tip = tip;
-        this.ogrodja = ogrodja;
+        public ObservableCollection<ProgramskiJezik> programskiJezik { get; set; } = new ObservableCollection<ProgramskiJezik>();
+        public ObservableCollection<Ogrodje> ogrodjas { get; set; } = new ObservableCollection<Ogrodje>();
     }
 
-    public string Name
+
+    public class View
     {
-        get { return this.name; }
-        set
+        public Settings Settings { get; set; }
+        public string tip;
+
+        public string Tip
         {
-            if (this.name != value)
-            {
-                this.name = value;
-                this.NotifyPropertyChanged("Name");
-            }
+            get { return Settings.programskiJezik.First().tip[0]; }
         }
-    }
 
-    public event PropertyChangedEventHandler PropertyChanged;
+        public View()
+        {
+            Settings = new Settings();
+        }
 
-    public void NotifyPropertyChanged(string propName)
-    {
-        if (this.PropertyChanged != null)
-            this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
-    }
-}
-public class Settings
-{
-    public ObservableCollection<ProgramskiJezik> programskiJezik {get; set; } = new ObservableCollection<ProgramskiJezik>();
-}
-
-
-public class View
-{
-    public Settings Settings { get; set; }
-    public string tip;
-
-    public string Tip
-    {
-        get { return Settings.programskiJezik.First().tip[0]; }
-    }
-
-    public View()
-    {
-        Settings = new Settings();
     }
 }
