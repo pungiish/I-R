@@ -31,106 +31,107 @@ namespace IDE.Properties
             }
 
         }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
-        public ObservableCollection<KeyValuePair<int, string>> programskiJezik
-        {
-            get
-            {
-                return ((ObservableCollection<KeyValuePair<int, string>>)(this["programskiJezik"]));
-            }
-            set
-            {
-                this["programskiJezik"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public ObservableCollection<KeyValuePair<string, string>> tipiProjektov
-        {
-            get
-            {
-                return ((ObservableCollection<KeyValuePair<string, string>>)(this["tipiProjektov"]));
-            }
-            set
-            {
-                this["tipiProjektov"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //    [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        //    public ObservableCollection<KeyValuePair<int, string>> programskiJezik
+        //    {
+        //        get
+        //        {
+        //            return ((ObservableCollection<KeyValuePair<int, string>>)(this["programskiJezik"]));
+        //        }
+        //        set
+        //        {
+        //            this["programskiJezik"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //    [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("")]
+        //    public ObservableCollection<KeyValuePair<string, string>> tipiProjektov
+        //    {
+        //        get
+        //        {
+        //            return ((ObservableCollection<KeyValuePair<string, string>>)(this["tipiProjektov"]));
+        //        }
+        //        set
+        //        {
+        //            this["tipiProjektov"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        //    [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("")]
 
-        public ObservableCollection<string> ogrodja
-        {
-            get
-            {
-                return ((ObservableCollection<string>)(this["ogrodja"]));
-            }
-            set
-            {
-                this["ogrodja"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+        //    public ObservableCollection<string> ogrodja
+        //    {
+        //        get
+        //        {
+        //            return ((ObservableCollection<string>)(this["ogrodja"]));
+        //        }
+        //        set
+        //        {
+        //            this["ogrodja"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("true")]
 
-        public bool shrani
-        {
-            get
-            {
-                return (bool)(this["shrani"]);
-            }
-            set
-            {
-                this["shrani"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        //    public bool shrani
+        //    {
+        //        get
+        //        {
+        //            return (bool)(this["shrani"]);
+        //        }
+        //        set
+        //        {
+        //            this["shrani"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("0")]
 
-        public int sec
-        {
-            get
-            {
-                return (int)(this["sec"]);
-            }
-            set
-            {
-                this["sec"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        //    public int sec
+        //    {
+        //        get
+        //        {
+        //            return (int)(this["sec"]);
+        //        }
+        //        set
+        //        {
+        //            this["sec"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("1")]
 
-        public int min
-        {
-            get
-            {
-                return (int)(this["min"]);
-            }
-            set
-            {
-                this["min"] = value;
-            }
-        }
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        //    public int min
+        //    {
+        //        get
+        //        {
+        //            return (int)(this["min"]);
+        //        }
+        //        set
+        //        {
+        //            this["min"] = value;
+        //        }
+        //    }
+        //    [global::System.Configuration.UserScopedSettingAttribute()]
+        //    [global::System.Configuration.DefaultSettingValueAttribute("0")]
 
-        public int hr
-        {
-            get
-            {
-                return (int)(this["hr"]);
-            }
-            set
-            {
-                this["hr"] = value;
-            }
-        }
+        //    public int hr
+        //    {
+        //        get
+        //        {
+        //            return (int)(this["hr"]);
+        //        }
+        //        set
+        //        {
+        //            this["hr"] = value;
+        //        }
+        //    }
+        //}
     }
 }

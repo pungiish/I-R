@@ -31,7 +31,7 @@
                         </MenuItem>
                         <MenuItem Header="_Pogled" />
                         <MenuItem Header="_Orodja">
-                            <MenuItem Header="_Nastavitve" />
+                            <MenuItem Header="_Nastavitve" Click="MenuItem_Click_OdpriNastavitve"/>
                             <!--Click="MenuItem_Click"-->
                         </MenuItem>
                     </Menu>

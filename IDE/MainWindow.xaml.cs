@@ -344,12 +344,12 @@ namespace IDE
         //    if (saveFileDialog.ShowDialog() == true)
         //        File.WriteAllText(saveFileDialog.FileName, textRange.Text);
         //}
-        //private void MenuItem_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Nastavitve o = new Nastavitve();
+        private void MenuItem_Click_OdpriNastavitve(object sender, RoutedEventArgs e)
+        {
+            Nastavitve o = new Nastavitve();
 
-        //    o.ShowDialog();
-        //}
+            o.ShowDialog();
+        }
 
         private void Nov_Projekt(object sender, RoutedEventArgs e)
         {

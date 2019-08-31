@@ -8,7 +8,8 @@
         Title="Nov_Projekt" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="10">
-            <ComboBox Name="jeziki" ItemsSource="{Binding ProgramskiJeziks}" SelectionChanged="jeziki_SelectionChanged">
+            <ComboBox Name="jeziki" ItemsSource="{Binding ProgramskiJeziks}" >
+                <!--SelectionChanged="jeziki_SelectionChanged"-->
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
@@ -36,7 +37,8 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <StackPanel Orientation="Horizontal">
-                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Shrani">Shrani</Button>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" >Shrani</Button>
+                <!-- Click="Shrani" -->
             </StackPanel>
         </StackPanel>
        
