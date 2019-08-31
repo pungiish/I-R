@@ -1,5 +1,7 @@
+using System;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Threading;
 
 namespace IDE
 {
@@ -8,32 +10,32 @@ namespace IDE
     /// </summary>
     public partial class MainWindow : Window
     {
-        //public DispatcherTimer dispatcherTimer { get; private set; }
-        //public int sec = Properties.Settings.Default.sec;
-        //public int min = Properties.Settings.Default.min;
-        //public int hr = Properties.Settings.Default.hr;
+        public DispatcherTimer dispatcherTimer { get; private set; }
+        public int sec = Properties.Settings.Default.sec;
+        public int min = Properties.Settings.Default.min;
+        public int hr = Properties.Settings.Default.hr;
         TreeViewItem tviI = new TreeViewItem() { Header = "Hiter Projekt", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
         TreeViewItem tviIA = new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
         TreeViewItem tviIB = new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
 
         public MainWindow()
         {
-            //if (Properties.Settings.Default.shrani == true)
-            //{
-            //    dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-            //    dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            //    dispatcherTimer.Interval = new TimeSpan(hr, min, sec);
-            //    dispatcherTimer.Start();
-            //}
+            if (Properties.Settings.Default.shrani == true)
+            {
+                dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                dispatcherTimer.Interval = new TimeSpan(hr, min, sec);
+                dispatcherTimer.Start();
+            }
             InitializeComponent();
 
         }
-        //private void dispatcherTimer_Tick(object sender, EventArgs e)
-        //{
-        //    Properties.Settings.Default.Save();
-        //}
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
+        }
 
-        
+
 
         private void Izhod_Click(object sender, RoutedEventArgs e)
         {
