@@ -6,7 +6,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid Name="grid1">
-        
+
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel Width="auto">
@@ -59,27 +59,17 @@
                 </DockPanel>
             </StackPanel>
             <DockPanel>
-                <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" >
-                        <!--GotFocus="strukturaProjekta_GotFocus"-->
-                    </TreeView>
-                <Expander Name="expander2" ExpandDirection="Left" VerticalAlignment="Top" VerticalContentAlignment="Stretch" DockPanel.Dock="Right">
-                    <Expander.Header>
-                        <Label Content="Solution Explorer">
-                            <Label.LayoutTransform>
-                                <RotateTransform Angle="270"/>
-                            </Label.LayoutTransform>
-                        </Label> 
-                    </Expander.Header>
-                <!--<ListView ItemsSource="{Binding}"  Name="metode" DockPanel.Dock="Right">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                        <WrapPanel>
-                            <TextBlock Text="{Binding}"/>
-                        </WrapPanel>
-                    </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>-->
-                </Expander>
+                <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="strukturaProjekta_SelectedItemChanged">
+                    <!--GotFocus="strukturaProjekta_GotFocus"-->
+                </TreeView>
+                <ListView x:Name="listView" DockPanel.Dock="Right">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="Id" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Metoda}"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
                 <StatusBar DockPanel.Dock="Bottom">
                     <StatusBarItem>
                         <TextBlock Name="lblCursorPosition" />

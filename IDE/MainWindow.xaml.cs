@@ -391,11 +391,31 @@ namespace IDE
 
 
         }
+
+        private void strukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        {
+            listView.Items.Clear();
+            var item = (e.NewValue as TreeViewItem);
+            if (item.Items.Count == 0 )
+            {
+                string name = item.Header.ToString();
+                if (name.Contains(".cs"))
+                {
+                    this.listView.Items.Add(new MyItem { Id = 1, Metoda = "private void strukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)" });
+
+                }
+            }
+        }
     }
 
 }
 
+public class MyItem
+{
+    public int Id { get; set; }
 
+    public string Metoda { get; set; }
+}
 public static class myExtension
 {
 
