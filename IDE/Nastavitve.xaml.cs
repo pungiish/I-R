@@ -20,11 +20,11 @@ namespace IDE
         //public ObservableCollection<KeyValuePair<string, string>> projectList;
         //public ObservableCollection<string> Ogrodjas { get; set; }
         //public ListViewItem item { get; set; }
-        private ObservableCollection<User> users = new ObservableCollection<User>();
-        private ObservableCollection<Settings> settings = new ObservableCollection<Settings>();
+        public Settings settings = new Settings();
 
         public Nastavitve()
-        {
+        {   
+
 
             //Ogrodjas = new ObservableCollection<string>();
             //TipiProjektov = new ObservableCollection<KeyValuePair<string, string>>();
@@ -44,26 +44,29 @@ namespace IDE
             //_tipiProjektov = TipiProjektov.ToArray();
             //projectList = new ObservableCollection<KeyValuePair<string, string>>(_tipiProjektov);
             InitializeComponent();
-            DataContext = new View();
+            settings.programskiJezik.Add(new ProgramskiJezik("c++", new string[] { "tip1", "tip2" }, new string[] { "ogrodje1" }));
+            settings.programskiJezik.Add(new ProgramskiJezik("c", new string[] { "tip1" }, new string[] { "ogrodje1" }));
+            DataContext = settings;
             //DataContext = this;
             //ogrodja.ItemsSource = Ogrodjas;
             //shrani.IsChecked = Properties.Settings.Default.shrani;
         }
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
         {
-            users.Add(new User() { Name = "New user" });
+            settings.programskiJezik.Add(new ProgramskiJezik(txtBox.Text, new string[] { "tip5", "tip6" }, new string[] { "ogrodje3" }));
         }
 
         private void btnChangeUser_Click(object sender, RoutedEventArgs e)
         {
-            //if (lbUsers.SelectedItem != null)
-                //(lbUsers.SelectedItem as User).Name = "Random Name";
+            if(programskiJeziki.SelectedItem != null)
+                (programskiJeziki.SelectedItem as ProgramskiJezik).Name = txtBox.Text;
         }
 
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
-            //if (lbUsers.SelectedItem != null)
-                //users.Remove(lbUsers.SelectedItem as User);
+            if (programskiJeziki.SelectedItem != null)
+                settings.programskiJezik.Remove(programskiJeziki.SelectedItem as ProgramskiJezik);
+            this.tipi1.Items.Clear();
         }
         private void Inicializiraj_Tipe_Projektov()
         {
@@ -275,6 +278,6 @@ public class View
 
     public View()
     {
-        Settings = new Settings() { programskiJezik = { new ProgramskiJezik("c++", new string[] {"tip1", "tip2"}, new string[] { "ogrodje1" }), new ProgramskiJezik("c", new string[] { "tip1" }, new string[] { "ogrodje1" })} };
+        Settings = new Settings();
     }
 }
