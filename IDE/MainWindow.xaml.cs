@@ -1,17 +1,5 @@
 using System.Windows;
-using System.Windows.Documents;
-using System.Windows.Media;
-using System.IO;
-using System.Windows.Forms;
 using System.Windows.Controls;
-using System;
-using System.Collections.Generic;
-using System.Text.RegularExpressions;
-using System.Linq;
-using System.Security;
-using IDE.Model;
-using System.Windows.Threading;
-using TreeView = System.Windows.Controls.TreeView;
 
 namespace IDE
 {
@@ -178,7 +166,7 @@ namespace IDE
         //    using (var fbd = new FolderBrowserDialog())
         //    {
         //    DialogResult result = fbd.ShowDialog();
-            
+
         //                  if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
         //                {
         //    files = Directory.GetFiles(fbd.SelectedPath);
@@ -247,7 +235,7 @@ namespace IDE
         //            files = null;
         //            break;
         //    }
-           
+
 
         //}
 
@@ -325,7 +313,7 @@ namespace IDE
 
         //}
 
-        
+
 
         //private void Odpri_Datoteko(object sender, RoutedEventArgs e)
         //{
@@ -372,21 +360,26 @@ namespace IDE
         private void MenuItem_Click_UstvariProjekt(object sender, RoutedEventArgs e)
         {
 
-            tviI.Items.Add(tviIA);
-            tviI.Items.Add(tviIB);
             strukturaProjekta.Items.Add(tviI);
+            strukturaProjekta.Items.Add(tviIA);
+            strukturaProjekta.Items.Add(tviIB);
+
 
         }
 
         private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
         {
-            Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-            if (saveFileDialog.ShowDialog() == true)
+            if (strukturaProjekta.Items.Count != 0)
             {
-                // do smth
+
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    // do smth
+                }
+                strukturaProjekta.Items.Remove(tviI);
+                tviI.Items.Clear();
             }
-            strukturaProjekta.Items.Remove(tviI);
-            tviI.Items.Clear();
 
 
 
@@ -396,7 +389,8 @@ namespace IDE
         {
             listView.Items.Clear();
             var item = (e.NewValue as TreeViewItem);
-            if (item.Items.Count == 0 )
+            strukturaProjekta.Tag = item;
+            if (item.Items.Count == 0)
             {
                 string name = item.Header.ToString();
                 if (name.Contains(".cs"))
@@ -409,11 +403,20 @@ namespace IDE
 
         private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
         {
-            // spremeni na koncu!
             strukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
-            TreeViewItem tviIA = new TreeViewItem() { Header = "class.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
 
 
+        }
+
+        private void MenuItem_Click_OdstraniDatoteko(object sender, RoutedEventArgs e)
+        {
+            if (strukturaProjekta.SelectedItem == null)
+            {
+                System.Windows.MessageBox.Show($"There is no selected item!");
+
+            }
+            else
+                strukturaProjekta.Items.Remove(strukturaProjekta.SelectedItem);
         }
     }
 
@@ -428,20 +431,20 @@ public class MyItem
 public static class myExtension
 {
 
-//public static TreeViewItem ContainerFromItemRecursive(this ItemContainerGenerator root, object item)
-//{
-//    var treeViewItem = root.ContainerFromItem(item) as TreeViewItem;
-//    if (treeViewItem != null)
-//        return treeViewItem;
-//    foreach (var subItem in root.Items)
-//    {
-//        treeViewItem = root.ContainerFromItem(subItem) as TreeViewItem;
-//        var search = (TreeViewItem)treeViewItem?.ItemContainerGenerator.ContainerFromItem(item);
-//        if (search != null)
-//            return search;
-//    }
-//    return null;
-//}
+    //public static TreeViewItem ContainerFromItemRecursive(this ItemContainerGenerator root, object item)
+    //{
+    //    var treeViewItem = root.ContainerFromItem(item) as TreeViewItem;
+    //    if (treeViewItem != null)
+    //        return treeViewItem;
+    //    foreach (var subItem in root.Items)
+    //    {
+    //        treeViewItem = root.ContainerFromItem(subItem) as TreeViewItem;
+    //        var search = (TreeViewItem)treeViewItem?.ItemContainerGenerator.ContainerFromItem(item);
+    //        if (search != null)
+    //            return search;
+    //    }
+    //    return null;
+    //}
 
 }
 public class TreeItem
