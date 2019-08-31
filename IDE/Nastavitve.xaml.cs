@@ -20,6 +20,9 @@ namespace IDE
         //public ObservableCollection<KeyValuePair<string, string>> projectList;
         //public ObservableCollection<string> Ogrodjas { get; set; }
         //public ListViewItem item { get; set; }
+        private ObservableCollection<User> users = new ObservableCollection<User>();
+        private ObservableCollection<Settings> settings = new ObservableCollection<Settings>();
+
         public Nastavitve()
         {
 
@@ -40,12 +43,28 @@ namespace IDE
             //}
             //_tipiProjektov = TipiProjektov.ToArray();
             //projectList = new ObservableCollection<KeyValuePair<string, string>>(_tipiProjektov);
-            //InitializeComponent();
+            InitializeComponent();
+            DataContext = new View();
             //DataContext = this;
             //ogrodja.ItemsSource = Ogrodjas;
             //shrani.IsChecked = Properties.Settings.Default.shrani;
         }
+        private void btnAddUser_Click(object sender, RoutedEventArgs e)
+        {
+            users.Add(new User() { Name = "New user" });
+        }
 
+        private void btnChangeUser_Click(object sender, RoutedEventArgs e)
+        {
+            //if (lbUsers.SelectedItem != null)
+                //(lbUsers.SelectedItem as User).Name = "Random Name";
+        }
+
+        private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            //if (lbUsers.SelectedItem != null)
+                //users.Remove(lbUsers.SelectedItem as User);
+        }
         private void Inicializiraj_Tipe_Projektov()
         {
             //TipiProjektov.Add(new KeyValuePair<string, string>("c++", "Windows Console App"));
@@ -165,6 +184,97 @@ namespace IDE
             //Properties.Settings.Default.Reload();
 
         }
+
+        
+        private void tipi_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            var item = (sender as ListView).SelectedItem;
+            if (item != null)
+            {
+                ProgramskiJezik programskiJezik = (ProgramskiJezik)item;
+                this.tipi1.ItemsSource = programskiJezik.tip;
+            }
+        }
     }
 
+}
+public class User : INotifyPropertyChanged
+{
+    private string name;
+    public string Name
+    {
+        get { return this.name; }
+        set
+        {
+            if (this.name != value)
+            {
+                this.name = value;
+                this.NotifyPropertyChanged("Name");
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void NotifyPropertyChanged(string propName)
+    {
+        if (this.PropertyChanged != null)
+            this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    }
+}
+
+public class ProgramskiJezik : INotifyPropertyChanged
+{
+    private string name;
+    public string[] tip { get; set; }
+    public string[] ogrodja { get; set; }
+
+    public ProgramskiJezik(string name, string[] tip, string[] ogrodja)
+    {
+        this.name = name;
+        this.tip = tip;
+        this.ogrodja = ogrodja;
+    }
+
+    public string Name
+    {
+        get { return this.name; }
+        set
+        {
+            if (this.name != value)
+            {
+                this.name = value;
+                this.NotifyPropertyChanged("Name");
+            }
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+
+    public void NotifyPropertyChanged(string propName)
+    {
+        if (this.PropertyChanged != null)
+            this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+    }
+}
+public class Settings
+{
+    public ObservableCollection<ProgramskiJezik> programskiJezik {get; set; } = new ObservableCollection<ProgramskiJezik>();
+}
+
+
+public class View
+{
+    public Settings Settings { get; set; }
+    public string tip;
+
+    public string Tip
+    {
+        get { return Settings.programskiJezik.First().tip[0]; }
+    }
+
+    public View()
+    {
+        Settings = new Settings() { programskiJezik = { new ProgramskiJezik("c++", new string[] {"tip1", "tip2"}, new string[] { "ogrodje1" }), new ProgramskiJezik("c", new string[] { "tip1" }, new string[] { "ogrodje1" })} };
+    }
 }

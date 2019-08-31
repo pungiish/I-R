@@ -13,32 +13,55 @@
                 <DockPanel>
                     <TextBox Name="txtBox" DockPanel.Dock="Top" Text="Vnesi željen programski jezik."></TextBox>
                     <!--<ListBox Name="programskiJezik"  ItemsSource="{Binding ProgramskiJeziks}" DockPanel.Dock="Left"></ListBox>-->
-                    <ListView Name="programskiJezik" DockPanel.Dock="Left" ItemsSource="{Binding ProgramskiJeziks}">
-                        <ListView.ItemContainerStyle>
+                    <!--<ListView Name="programskiJezik" DockPanel.Dock="Left">-->
+                        <!--ItemsSource="{Binding ProgramskiJeziks}"-->
+                        <!--<ListView.ItemContainerStyle>
                             <Style   TargetType="ListViewItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                                 <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
                             </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
+                        </ListView.ItemContainerStyle>-->
+                        <!--<ListView.ItemTemplate>
                             <DataTemplate>
                                 <WrapPanel>
-                                    <TextBlock Text="{Binding Value}"></TextBlock>
+                                    <TextBlock >"Lalala"</TextBlock>
+                                    --><!--Text="{Binding Value}"--><!--
                                 </WrapPanel>
                             </DataTemplate>
                         </ListView.ItemTemplate>
-                    </ListView>
-                    <ListView Name="tipAplikacij"  ItemsSource="{Binding TipiProjektov}" DisplayMemberPath="Value" DockPanel.Dock="Top"></ListView>
-                    <StackPanel Orientation="Horizontal">
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="SaveProgramskeJezike">Dodaj</Button>
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_1">Odstrani</Button>
+                    </ListView>-->
+                    <StackPanel DockPanel.Dock="Right" Margin="10,0,0,0">
+                        <Button Name="btnAddUser" Click="btnAddUser_Click">Add language</Button>
+                        <Button Name="btnChangeUser" Click="btnChangeUser_Click" Margin="0,5">Change language</Button>
+                        <Button Name="btnDeleteUser" Click="btnDeleteUser_Click">Delete language</Button>
                     </StackPanel>
+                    <Grid>
+                        <ListView ItemsSource="{Binding Settings.programskiJezik}" Name="tipi" PreviewMouseLeftButtonUp="tipi_PreviewMouseLeftButtonUp">
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    <Grid>
+                        
+                        <ListView  Name="tipi1">
+                            <ListView.View>
+                                <GridView >
+                                    <GridViewColumn Header="Name2" DisplayMemberBinding="{Binding}"/>
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
+                    <!--ItemsSource="{Binding TipiProjektov}" DisplayMemberPath="Value"-->
                 </DockPanel>
             </TabItem>
             <TabItem Header="Ogrodja">
                 <DockPanel>
                     <TextBox Name="txtBox1" DockPanel.Dock="Top" Text="Vnesi željeno ogrodje."></TextBox>
-                    <ListBox Name="ogrodja"  ItemsSource="{Binding Ogrodjas}" DockPanel.Dock="Top"></ListBox>
+                    <ListBox Name="ogrodja"  DockPanel.Dock="Top"></ListBox>
+                    <!--ItemsSource="{Binding Ogrodjas}"-->
                     <StackPanel Orientation="Horizontal">
                         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click_3">Dodaj</Button>
                         <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_4">Odstrani</Button>

@@ -346,9 +346,8 @@ namespace IDE
         //}
         private void MenuItem_Click_OdpriNastavitve(object sender, RoutedEventArgs e)
         {
-            Nastavitve o = new Nastavitve();
-
-            o.ShowDialog();
+            Nastavitve subWindow = new Nastavitve();
+            subWindow.ShowDialog();
         }
 
         private void Nov_Projekt(object sender, RoutedEventArgs e)
