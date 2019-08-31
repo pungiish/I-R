@@ -50,5 +50,61 @@ namespace IDE.Properties {
                 this["CustomSettings"] = value;
             }
         }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+
+        public bool shrani
+        {
+            get
+            {
+                return (bool)(this["shrani"]);
+            }
+            set
+            {
+                this["shrani"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+
+        public int sec
+        {
+            get
+            {
+                return (int)(this["sec"]);
+            }
+            set
+            {
+                this["sec"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+
+        public int min
+        {
+            get
+            {
+                return (int)(this["min"]);
+            }
+            set
+            {
+                this["min"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+
+        public int hr
+        {
+            get
+            {
+                return (int)(this["hr"]);
+            }
+            set
+            {
+                this["hr"] = value;
+            }
+        }
     }
 }
