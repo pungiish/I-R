@@ -1,19 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace IDE
 {
@@ -22,11 +12,12 @@ namespace IDE
     /// </summary>
     public partial class Nov_Projekt : Window
     {
-        public ObservableCollection<string> ProgramskiJeziks { get; set; }
-        public ObservableCollection<KeyValuePair<String, String>> TipiProjektov { get; set; }
+        public ObservableCollection<KeyValuePair<int, string>> ProgramskiJeziks { get; set; }
+        public ObservableCollection<KeyValuePair<string, string>> TipiProjektov { get; set; }
         public ObservableCollection<string> Ogrodjas { get; set; }
         public Nov_Projekt()
         {
+
             ProgramskiJeziks = Properties.Settings.Default.programskiJezik;
             Ogrodjas = Properties.Settings.Default.ogrodja;
             TipiProjektov = Properties.Settings.Default.tipiProjektov;
@@ -35,7 +26,7 @@ namespace IDE
             if (Ogrodjas == null)
                Ogrodjas = new ObservableCollection<string>();
             if (ProgramskiJeziks == null)
-                ProgramskiJeziks = new ObservableCollection<string>();
+                ProgramskiJeziks = new ObservableCollection<KeyValuePair<int, string>>();
 
             InitializeComponent();
             DataContext = this;
@@ -52,13 +43,14 @@ namespace IDE
             TipiProjektov = Properties.Settings.Default.tipiProjektov;
             KeyValuePair<string, string>[] arr = new KeyValuePair<string, string>[TipiProjektov.Count];
             TipiProjektov.CopyTo(arr, 0);
+            string key = ((KeyValuePair<int, string>)jeziki.SelectedItem).Value;
             foreach (var items in arr)
             {
                 if (items.Key == null)
                 {
                     continue;
                 }
-                if (items.Key.ToLower() != jeziki.SelectedItem.ToString().ToLower())
+                if (items.Key != key.ToString().ToLower())
                 {
                     TipiProjektov.Remove(items);
                 }
@@ -74,11 +66,11 @@ namespace IDE
 
             SaveFileDialog saveFileDialog = new SaveFileDialog();
             saveFileDialog.InitialDirectory = path;
-            saveFileDialog.Filter = "XML Files (*.xml)|*.xml";
+            saveFileDialog.Filter = "TXT Files (*.txt)|*.txt";
             DialogResult fbd = saveFileDialog.ShowDialog();
             if (fbd == System.Windows.Forms.DialogResult.OK)
             {
-                //File.WriteAllText(saveFileDialog.FileName, txtEditor.Text);
+                File.WriteAllText(saveFileDialog.FileName, "Datoteka");
             }
         }
     }

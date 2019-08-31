@@ -5,27 +5,34 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:IDE"
         mc:Ignorable="d"
-        Title="Nastavitve" Height="450" Width="800" ResizeMode="NoResize">
+        Title="Nastavitve" Height="450" Width="800" ResizeMode="NoResize"
+         Closing="DataWindow_Closing"  >
     <Grid>
         <TabControl>
-            <TabItem Header="Programski Jeziki">
+            <TabItem Header="Programski Jeziki" HorizontalAlignment="Left" Width="107">
                 <DockPanel>
                     <TextBox Name="txtBox" DockPanel.Dock="Top" Text="Vnesi željen programski jezik."></TextBox>
                     <!--<ListBox Name="programskiJezik"  ItemsSource="{Binding ProgramskiJeziks}" DockPanel.Dock="Left"></ListBox>-->
-                    <ListView Name="programskiJezik" ItemsSource="{Binding ProgramskiJeziks}" DockPanel.Dock="Left" >
+                    <ListView Name="programskiJezik" DockPanel.Dock="Left" ItemsSource="{Binding ProgramskiJeziks}">
                         <ListView.ItemContainerStyle>
                             <Style   TargetType="ListViewItem">
                                 <EventSetter Event="PreviewMouseLeftButtonDown" Handler="ListViewItem_PreviewMouseLeftButtonDown" />
                                 <EventSetter Event="PreviewMouseLeftButtonUp" Handler="ListViewItem_PreviewMouseLeftButtonUp" />
                             </Style>
                         </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <WrapPanel>
+                                    <TextBlock Text="{Binding Value}"></TextBlock>
+                                </WrapPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
                     </ListView>
-                    <ListBox Name="tipAplikacij"  ItemsSource="{Binding TipiProjektov}" DisplayMemberPath="Value" DockPanel.Dock="Top"></ListBox>
-
+                    <ListView Name="tipAplikacij"  ItemsSource="{Binding TipiProjektov}" DisplayMemberPath="Value" DockPanel.Dock="Top"></ListView>
                     <StackPanel Orientation="Horizontal">
-                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click">Dodaj</Button>
-                    <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_1">Odstrani</Button>
-                </StackPanel>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="SaveProgramskeJezike">Dodaj</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_1">Odstrani</Button>
+                    </StackPanel>
                 </DockPanel>
             </TabItem>
             <TabItem Header="Ogrodja">
@@ -38,7 +45,17 @@
                     </StackPanel>
                 </DockPanel>
             </TabItem>
+            <TabItem Header="Shranjevanje">
+                <DockPanel>
+                    <CheckBox  x:Name="shrani" Content="Shrani" IsChecked="True" Checked="CheckBox_Checked"
+            Unchecked="CheckBox_Unchecked">
+                    </CheckBox>
+                    <StackPanel Orientation="Horizontal">
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click_3">Dodaj</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_4">Odstrani</Button>
+                    </StackPanel>
+                </DockPanel>
+            </TabItem>
         </TabControl>
-     
     </Grid>
 </Window>

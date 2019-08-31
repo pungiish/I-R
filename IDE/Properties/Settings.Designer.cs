@@ -34,11 +34,11 @@ namespace IDE.Properties
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SettingsSerializeAs(System.Configuration.SettingsSerializeAs.Binary)]
-        public ObservableCollection<string> programskiJezik
+        public ObservableCollection<KeyValuePair<int, string>> programskiJezik
         {
             get
             {
-                return ((ObservableCollection<string>)(this["programskiJezik"]));
+                return ((ObservableCollection<KeyValuePair<int, string>>)(this["programskiJezik"]));
             }
             set
             {
@@ -74,6 +74,62 @@ namespace IDE.Properties
             set
             {
                 this["ogrodja"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("true")]
+
+        public bool shrani
+        {
+            get
+            {
+                return (bool)(this["shrani"]);
+            }
+            set
+            {
+                this["shrani"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+
+        public int sec
+        {
+            get
+            {
+                return (int)(this["sec"]);
+            }
+            set
+            {
+                this["sec"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+
+        public int min
+        {
+            get
+            {
+                return (int)(this["min"]);
+            }
+            set
+            {
+                this["min"] = value;
+            }
+        }
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+
+        public int hr
+        {
+            get
+            {
+                return (int)(this["hr"]);
+            }
+            set
+            {
+                this["hr"] = value;
             }
         }
     }

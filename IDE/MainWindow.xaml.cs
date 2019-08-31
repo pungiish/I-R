@@ -1,7 +1,6 @@
 using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
-using Hierarhija;
 using System.IO;
 using System.Windows.Forms;
 using System.Windows.Controls;
@@ -9,29 +8,61 @@ using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using System.Linq;
-using System.ComponentModel;
-using System.Windows.Data;
 using System.Security;
-using Microsoft.Win32;
-
+using IDE.Model;
+using System.Windows.Threading;
 
 namespace IDE
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Ob kliku na izhod se program zapre.
+    /// Ob kliku na odpri projekt moramo zbrati pot do datotek projekta,
+    /// Datoteke v poti se nafilajo v levi expander, kjer se nahaja "Solution Explorer".
+    /// Ob kliku na Datoteko v Solution Explorerju, se v RichTextBoxu izpiše vsebina datoteke.
+    /// Prav tako se v primeru C# kode, v desnem meniju odprejo metode.
+    /// Projekt se da tudi zapreti.
+    /// Če je odprt projekt, se ob kliku na dodaj datoteko, doda nova datoteka File1.txt
+    /// Ob kliku na datoteko in Odstrani_Datoteko, se datoteka odstrani iz projekta.
+    /// Ikone so.
+    /// V nastavitvah lahko dodajamo Programske jezike, za C++, C in C# so tipi projektov v naprej določeni.
+    /// Nato lahko z gumbom ustvarimo nov projekt, C++, C, C# se avtomatsko filtrira za tip projektov.
+    /// Nato lahko Shranimo projekt.
+    /// Delo s podatki, Databinding, DataTriggerji so definirani.
+    /// User Control sem naredil, A mi databindingi ne delajo, zato je zakomentiran, A je vseeno dodan med reference kot WpfControlLibrary1.
+    /// Dodan Dispatcher Timer za shranjevanje Settingov.
+    /// 
     /// </summary>
     public partial class MainWindow : Window
     {
+        // Polje datotek v mapi projekta.
         string[] files = null;
         Metode met = new Metode();
+        // ShowProjekt in ShowMetode za Expandanje Expanderja v XML.
         public bool ShowProjekt { get; set; } = false;
         public bool ShowMetode { get; set; } = false;
+        public DispatcherTimer dispatcherTimer { get; private set; }
+        public int sec = Properties.Settings.Default.sec;
+        public int min = Properties.Settings.Default.min;
+        public int hr = Properties.Settings.Default.hr;
+
         public MainWindow()
         {
+            if (Properties.Settings.Default.shrani == true)
+            {
+                dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
+                dispatcherTimer.Interval = new TimeSpan(hr, min, sec);
+                dispatcherTimer.Start();
+            }
             InitializeComponent();
             this.DataContext = this;
             expander.DataContext = ShowProjekt;
             expander2.DataContext = ShowMetode;
+
+        }
+        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.Save();
         }
 
         // Vrne vrstico, kjer se kurzor nahaja.
@@ -135,27 +166,28 @@ namespace IDE
 
         private void Dodaj_Projekt(object sender, RoutedEventArgs e)
         {
-            string path = @"C:\Users\Jan\Documents\0 IČR\IDE\IDE\";
+            //string path = @"C:\Users\Jan\Documents\0 IČR\IDE\IDE\";
             string dir = "";
-            files = Directory.GetFiles(path);
+            string path = "";
+            //files = Directory.GetFiles(path);
             dir = path;
-            //using (var fbd = new FolderBrowserDialog())
-            //{
-            //DialogResult result = fbd.ShowDialog();
-            //
-            //              if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
-            //            {
-            //files = Directory.GetFiles(fbd.SelectedPath);
-            //              files = Directory.GetFiles(path);
-            //dir = fbd.SelectedPath;
-            //        }
-            //  }
+            using (var fbd = new FolderBrowserDialog())
+            {
+            DialogResult result = fbd.ShowDialog();
+            
+                          if (result == System.Windows.Forms.DialogResult.OK && !string.IsNullOrWhiteSpace(fbd.SelectedPath))
+                        {
+            files = Directory.GetFiles(fbd.SelectedPath);
+            //files = Directory.GetFiles(path);
+            dir = fbd.SelectedPath;
+                    }
+              }
             if (files.Length > 0)
             {
-                Hierarhija.Hierarhija root = new Hierarhija.Hierarhija() { Title = dir };
+                Hierarhija root = new Hierarhija() { Title = dir };
                 foreach (string file in files)
                 {
-                    root.Items.Add(new Hierarhija.Hierarhija() { Title = file });
+                    root.Items.Add(new Hierarhija() { Title = file });
                 }
                 strukturaProjekta.Items.Add(root);
                 ShowProjekt = true;
@@ -220,11 +252,15 @@ namespace IDE
         private void strukturaProjekta_GotFocus(object sender, RoutedEventArgs e)
         {
             if (met.Metode1 != null)
+            {
                 met.Metode1.Clear();
+                metode.ItemsSource = met.Metode1;
+                metode.Items.Refresh();
+            }
             TreeViewItem tvi = strukturaProjekta
                        .ItemContainerGenerator
                        .ContainerFromItemRecursive(strukturaProjekta.SelectedItem);
-            Hierarhija.Hierarhija h = (Hierarhija.Hierarhija)strukturaProjekta.SelectedItem;
+            Hierarhija h = (Hierarhija)strukturaProjekta.SelectedItem;
             Regex rx = new Regex(@"\w\.");
             if (h != null && (rx.IsMatch(h.Title)))
             {
@@ -246,7 +282,7 @@ namespace IDE
                             met.Metoda = true;
                             wordRange.Text = wordRange.Text.TrimStart('\t', '\n');
                             met.Metode1.Add(wordRange.Text);
-                            Console.WriteLine(wordRange.Text);
+                            //Console.WriteLine(wordRange.Text);
                             wordRange.ApplyPropertyValue(TextElement.ForegroundProperty, Brushes.Red);
                         }
                         if (wordRange.Text.Trim().Contains("class"))
@@ -297,7 +333,7 @@ namespace IDE
         {
             // Iz TreeView-a Izbriše izbrano datoteko, update-a files polje z datotekami, ki niso trenutno izbrana datoteka.
             // YaY LINQ! :smile:
-            Hierarhija.Hierarhija h = (Hierarhija.Hierarhija)strukturaProjekta.SelectedItem;
+            Hierarhija h = (Hierarhija)strukturaProjekta.SelectedItem;
             TreeViewItem tvi = strukturaProjekta
                        .ItemContainerGenerator
                        .ContainerFromItemRecursive(strukturaProjekta.SelectedItem);
@@ -318,12 +354,12 @@ namespace IDE
             //dir = fbd.SelectedPath;
             //        }
             //  }
-            Hierarhija.Hierarhija root = new Hierarhija.Hierarhija() { Title = dir };
+            Hierarhija root = new Hierarhija() { Title = dir };
             if (files.Length > 0)
             {
                 foreach (string file in files)
                 {
-                    root.Items.Add(new Hierarhija.Hierarhija() { Title = file });
+                    root.Items.Add(new Hierarhija() { Title = file });
                 }
                 Console.WriteLine(root.Items);
             }
@@ -376,17 +412,6 @@ namespace IDE
             IDE.Nov_Projekt nov = new IDE.Nov_Projekt();
             nov.ShowDialog();
         }
-    }
-
-}
-public class Metode
-{
-    public List<string> Metode1 { get; set; }
-    public string Title { get; set; }
-    public bool Metoda { get; set; }
-    public Metode()
-    {
-        this.Metode1 = new List<string>();
     }
 
 }

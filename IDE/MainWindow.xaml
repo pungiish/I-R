@@ -3,12 +3,13 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:self="clr-namespace:Hierarhija"
+        xmlns:self="clr-namespace:IDE.Model"
         xmlns:local="clr-namespace:IDE"
+        xmlns:userCtr1="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     
-    <Window.Resources>
+    <Window.Resources   >
         <HierarchicalDataTemplate DataType="{x:Type self:Hierarhija}"
                                   ItemsSource="{Binding Items}">
             <TextBlock Text="{Binding Path=Title}" ToolTip="{Binding Path=Title}" />
@@ -103,6 +104,7 @@
                 </StatusBar>
                 <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" SelectionChanged="txtEditor_SelectionChanged"/>
             </DockPanel>
+            <!-- <userCtr1:UserControl1 OdpriDesno="{Binding}" OdpriLevo="{Binding}" /> -->
         </DockPanel>
     </Grid>
 </Window>
