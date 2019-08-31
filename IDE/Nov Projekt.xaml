@@ -8,37 +8,31 @@
         Title="Nov_Projekt" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="10">
-            <ComboBox Name="jeziki" ItemsSource="{Binding ProgramskiJeziks}" >
-                <!--SelectionChanged="jeziki_SelectionChanged"-->
+            <TextBox Name="txtBox" DockPanel.Dock="Top" Text="Vnesi ime projekta."></TextBox>
+            <ComboBox ItemsSource="{Binding programskiJezik}" Name="programskiJezik"  SelectionChanged="jeziki_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}"/>
+                            <TextBlock Text="{Binding Name}"></TextBlock>
                         </StackPanel>
                     </DataTemplate>
+
                 </ComboBox.ItemTemplate>
             </ComboBox>
-            <ComboBox Name="tipi" ItemsSource="{Binding TipiProjektov}">
+            <ComboBox Name="tipi">
+            </ComboBox>
+            <ComboBox Name="ogrodja" ItemsSource="{Binding ogrodjas}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" />
-                        </StackPanel>
-                    </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <ComboBox Name="ogrodja" ItemsSource="{Binding Ogrodjas}">
-                <ComboBox.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding}" />
+                            <TextBlock Text="{Binding Name}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <StackPanel Orientation="Horizontal">
-                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" >Shrani</Button>
-                <!-- Click="Shrani" -->
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Save">Shrani</Button>
+                <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Cancel">Prekliči</Button>
             </StackPanel>
         </StackPanel>
        

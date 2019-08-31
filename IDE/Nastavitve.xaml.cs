@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
@@ -17,15 +18,9 @@ namespace IDE
         public Nastavitve()
         {
             InitializeComponent();
-            if (Properties.Settings.Default.CustomSettings.programskiJezik.Count == 0)
-            {
 
-                settings.programskiJezik.Add(new ProgramskiJezik("c++", new string[] { "tip1", "tip2" }));
-                settings.programskiJezik.Add(new ProgramskiJezik("c", new string[] { "tip1" }));
-                settings.ogrodjas.Add(new Ogrodje("WPF APP"));
-            }
-            else
-                settings = Properties.Settings.Default.CustomSettings;
+
+            settings = Properties.Settings.Default.CustomSettings;
             DataContext = settings;
         }
         private void btnAddUser_Click(object sender, RoutedEventArgs e)
@@ -103,6 +98,13 @@ namespace IDE
     {
         private string name;
         public string[] tip { get; set; }
+        public List<string> tipi
+        {
+            get
+            {
+                return toList();
+            }
+        }
 
         public ProgramskiJezik(string name, string[] tip)
         {
@@ -121,6 +123,17 @@ namespace IDE
                 }
             }
         }
+
+        public List<string> toList()
+        {
+            List<string> l = new List<string>();
+            foreach (string item in tip)
+            {
+                l.Add(item);
+            }
+            return l;
+        }
+
     }
     [Serializable]
     public class Ogrodje

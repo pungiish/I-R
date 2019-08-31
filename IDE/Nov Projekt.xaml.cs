@@ -12,66 +12,79 @@ namespace IDE
     /// </summary>
     public partial class Nov_Projekt : Window
     {
-    //    public ObservableCollection<KeyValuePair<int, string>> ProgramskiJeziks { get; set; }
-    //    public ObservableCollection<KeyValuePair<string, string>> TipiProjektov { get; set; }
-    //    public ObservableCollection<string> Ogrodjas { get; set; }
-    //    public Nov_Projekt()
-    //    {
+        public Settings settings;
+        public Nov_Projekt()
+        {
+            settings = Properties.Settings.Default.CustomSettings;
+            InitializeComponent();
+            DataContext = settings;
+        }
 
-    //        ProgramskiJeziks = Properties.Settings.Default.programskiJezik;
-    //        Ogrodjas = Properties.Settings.Default.ogrodja;
-    //        TipiProjektov = Properties.Settings.Default.tipiProjektov;
-    //        if (TipiProjektov == null)
-    //            TipiProjektov = new ObservableCollection<KeyValuePair<string, string>>();
-    //        if (Ogrodjas == null)
-    //           Ogrodjas = new ObservableCollection<string>();
-    //        if (ProgramskiJeziks == null)
-    //            ProgramskiJeziks = new ObservableCollection<KeyValuePair<int, string>>();
+        private void jeziki_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var item = (sender as System.Windows.Controls.ComboBox).SelectedItem;
+            if (item != null)
+            {
+                ProgramskiJezik programskiJezik = (ProgramskiJezik)item;
+                this.tipi.ItemsSource = programskiJezik.tip;
+            }
+        }
 
-    //        InitializeComponent();
-    //        DataContext = this;
+        private void Save(object sender, RoutedEventArgs e)
+        {
 
-    //        //jeziki.ItemsSource = ProgramskiJeziks;
-    //        //tipi.ItemsSource = TipiProjektov;
-    //        //ogrodja.ItemsSource = Ogrodjas;
 
-    //    }
+            string[] files;
+            string path = Directory.GetCurrentDirectory();
+            files = Directory.GetFiles(path);
+            string fileName = txtBox.Text;
+            var jezik = (ProgramskiJezik)programskiJezik.SelectedValue;
+            string tip = (string)tipi.SelectedValue;
+            var ogrodje = (Ogrodje)ogrodja.SelectedValue;
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = path;
+            saveFileDialog.Filter = "XML Files (*.XML)|*.XML";
+            DialogResult fbd = saveFileDialog.ShowDialog();
+            if (fbd == System.Windows.Forms.DialogResult.OK)
+            {
+                ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Clear();
+                //File.WriteAllText(saveFileDialog.FileName, "Datoteka");
+                ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = fileName, HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                if (jezik != null && tip != null & ogrodje != null)
+                {
+                    if (jezik.Name.ToLower() == "c++")
+                    {
 
-    //    private void jeziki_SelectionChanged(object sender, SelectionChangedEventArgs e)
-    //    {
-    //        Properties.Settings.Default.Reload();
-    //        TipiProjektov = Properties.Settings.Default.tipiProjektov;
-    //        KeyValuePair<string, string>[] arr = new KeyValuePair<string, string>[TipiProjektov.Count];
-    //        TipiProjektov.CopyTo(arr, 0);
-    //        string key = ((KeyValuePair<int, string>)jeziki.SelectedItem).Value;
-    //        foreach (var items in arr)
-    //        {
-    //            if (items.Key == null)
-    //            {
-    //                continue;
-    //            }
-    //            if (items.Key != key.ToString().ToLower())
-    //            {
-    //                TipiProjektov.Remove(items);
-    //            }
-    //        }
-    //        tipi.ItemsSource = TipiProjektov;
-    //    }
+                        if (tip.ToLower() == "console app")
+                        {
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
 
-    //    private void Shrani(object sender, RoutedEventArgs e)
-    //    {
-    //        string[] files;
-    //        string path = Directory.GetCurrentDirectory();
-    //        files = Directory.GetFiles(path);
+                        }
 
-    //        SaveFileDialog saveFileDialog = new SaveFileDialog();
-    //        saveFileDialog.InitialDirectory = path;
-    //        saveFileDialog.Filter = "TXT Files (*.txt)|*.txt";
-    //        DialogResult fbd = saveFileDialog.ShowDialog();
-    //        if (fbd == System.Windows.Forms.DialogResult.OK)
-    //        {
-    //            File.WriteAllText(saveFileDialog.FileName, "Datoteka");
-    //        }
-    //    }
+                    }
+                    else if (jezik.Name.ToLower() == "c#")
+                    {
+                        if (tip.ToLower() == "wpf app")
+                        {
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.xaml", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Settings.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                        }
+
+                        else if (tip.ToLower() == "console app")
+                        {
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+
+                        }
+                    }
+                    this.Close();
+                }
+            }
+        }
+
+        private void Cancel(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
