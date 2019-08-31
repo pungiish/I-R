@@ -69,16 +69,16 @@ namespace IDE
 
         private void CheckBox_Unchecked(object sender, RoutedEventArgs e)
         {
-            //Properties.Settings.Default.shrani = false;
-            //Properties.Settings.Default.Save();
-            //Properties.Settings.Default.Reload();
+            Properties.Settings.Default.shrani = false;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
 
         }
         private void CheckBox_Checked(object sender, RoutedEventArgs e)
         {
-            //Properties.Settings.Default.shrani = true;
-            //Properties.Settings.Default.Save();
-            //Properties.Settings.Default.Reload();
+            Properties.Settings.Default.shrani = true;
+            Properties.Settings.Default.Save();
+            Properties.Settings.Default.Reload();
 
         }
 
