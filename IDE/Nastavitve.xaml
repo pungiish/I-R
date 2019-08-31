@@ -54,7 +54,6 @@
                             </ListView.View>
                         </ListView>
                     </Grid>
-                    <!--ItemsSource="{Binding TipiProjektov}" DisplayMemberPath="Value"-->
                 </DockPanel>
             </TabItem>
             <TabItem Header="Ogrodja">
@@ -74,10 +73,9 @@
                             </ListView.View>
                         </ListView>
                     </Grid>
-                    <!--ItemsSource="{Binding Ogrodjas}"-->
                     <StackPanel Orientation="Horizontal">
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click_3">Dodaj</Button>
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_4">Odstrani</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left">Dodaj</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0">Odstrani</Button>
                     </StackPanel>
                 </DockPanel>
             </TabItem>
@@ -87,8 +85,8 @@
             Unchecked="CheckBox_Unchecked">
                     </CheckBox>
                     <StackPanel Orientation="Horizontal">
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Click="Button_Click_3">Dodaj</Button>
-                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0" Click="Button_Click_4">Odstrani</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left">Dodaj</Button>
+                        <Button VerticalAlignment="Bottom" HorizontalAlignment="Left" Margin="10 0 0 0">Odstrani</Button>
                     </StackPanel>
                 </DockPanel>
             </TabItem>
