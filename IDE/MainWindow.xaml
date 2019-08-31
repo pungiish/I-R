@@ -56,14 +56,16 @@
             </StackPanel>
             <DockPanel>
                 <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="strukturaProjekta_SelectedItemChanged">
-                    <!--GotFocus="strukturaProjekta_GotFocus"-->
                 </TreeView>
-                <ListView x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="listView_PreviewMouseLeftButtonUp">
-                    <ListView.View>
-                        <GridView>
-                            <GridViewColumn Header="Method" DisplayMemberBinding="{Binding Metoda}" Width="Auto"/>
-                        </GridView>
-                    </ListView.View>
+                <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="listView_PreviewMouseLeftButtonUp">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <WrapPanel>
+                                <TextBlock Text="Metoda: " />
+                                <TextBlock Text="{Binding Metoda}" FontWeight="Bold" />
+                            </WrapPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
                 </ListView>
                 <StatusBar DockPanel.Dock="Bottom">
                     <StatusBarItem>
@@ -71,9 +73,7 @@
                     </StatusBarItem>
                 </StatusBar>
                 <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" />
-                <!--SelectionChanged="txtEditor_SelectionChanged"-->
             </DockPanel>
-            <!-- <userCtr1:UserControl1 OdpriDesno="{Binding}" OdpriLevo="{Binding}" /> -->
         </DockPanel>
     </Grid>
 </Window>
