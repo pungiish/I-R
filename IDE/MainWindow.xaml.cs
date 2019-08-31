@@ -406,6 +406,15 @@ namespace IDE
                 }
             }
         }
+
+        private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
+        {
+            // spremeni na koncu!
+            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
+            TreeViewItem tviIA = new TreeViewItem() { Header = "class.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
+
+
+        }
     }
 
 }

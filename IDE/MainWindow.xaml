@@ -22,7 +22,7 @@
                             <!--Click="Odpri_Datoteko"-->
                             <MenuItem Header="_Izbriši Projekt"  />
                             <!--Click="Izbriši_Projekt"-->
-                            <MenuItem Header="_Dodaj_Datoteko"  />
+                            <MenuItem Header="_Dodaj_Datoteko" Click="MenuItem_Click_DodajDatoteko"  />
                             <!--Click="Dodaj_Datoteko"-->
                             <MenuItem Header="_Odstrani_Datoteko"  />
                             <!--Click="Odstrani_Datoteko"-->
