@@ -47,9 +47,9 @@ namespace IDE
             DialogResult fbd = saveFileDialog.ShowDialog();
             if (fbd == System.Windows.Forms.DialogResult.OK)
             {
-                ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Clear();
+                ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Clear();
                 //File.WriteAllText(saveFileDialog.FileName, "Datoteka");
-                ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = fileName, HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = fileName, HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
                 if (jezik != null && tip != null & ogrodje != null)
                 {
                     if (jezik.Name.ToLower() == "c++")
@@ -57,7 +57,7 @@ namespace IDE
 
                         if (tip.ToLower() == "console app")
                         {
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
 
                         }
 
@@ -66,14 +66,14 @@ namespace IDE
                     {
                         if (tip.ToLower() == "wpf app")
                         {
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.xaml", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Settings.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.xaml", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "Settings.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
                         }
 
                         else if (tip.ToLower() == "console app")
                         {
-                            ((MainWindow)System.Windows.Application.Current.MainWindow).strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            ((MainWindow)System.Windows.Application.Current.MainWindow).uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
 
                         }
                     }
