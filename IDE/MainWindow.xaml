@@ -12,10 +12,10 @@
                 <DockPanel Width="auto">
                     <Menu IsMainMenu="True">
                         <MenuItem Header="_Datoteka">
-                            <MenuItem Header="_Odpri Projekt"  />
+                            <MenuItem Header="_Odpri Projekt" Click="MenuItem_Click"  />
                             <MenuItem Header="_Nov Projekt" Click="MenuItem_Click_NovProjekt"  />
                             <MenuItem Header="_Hitro Ustvari Projekt" Click="MenuItem_Click_UstvariProjekt"  />
-                            <MenuItem Header="_Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
+                            <MenuItem Header="_Shrani/Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
                             <MenuItem Header="_Dodaj_Datoteko" Click="MenuItem_Click_DodajDatoteko"  />
                             <MenuItem Header="_Odstrani_Datoteko" Click="MenuItem_Click_OdstraniDatoteko"  />
                             <MenuItem Header="_Izhod" />
@@ -49,9 +49,9 @@
                 </DockPanel>
             </StackPanel>
             <DockPanel>
-                <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="strukturaProjekta_SelectedItemChanged">
+                <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="StrukturaProjekta_SelectedItemChanged">
                 </TreeView>
-                <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="listView_PreviewMouseLeftButtonUp">
+                <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="ListView_PreviewMouseLeftButtonUp">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>

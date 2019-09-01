@@ -3,7 +3,7 @@ using System.Xml.Serialization;
 
 namespace IDE.Model
 {
-    class Struktura : INotifyPropertyChanged
+    public class Struktura : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
         private string Ime;
@@ -18,8 +18,7 @@ namespace IDE.Model
 
         public void OnPropertyChanged(PropertyChangedEventArgs e)
         {
-            if (PropertyChanged != null)
-                PropertyChanged(this, e);
+            PropertyChanged?.Invoke(this, e);
         }
     }
 }

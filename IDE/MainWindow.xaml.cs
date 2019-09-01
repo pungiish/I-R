@@ -1,34 +1,40 @@
+using IDE.Model;
+using Microsoft.Win32;
 using System;
+using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using System.Xml.Serialization;
 using WpfControlLibrary1;
 
 namespace IDE
 {
     /// <summary>
-    
+
     /// </summary>
     public partial class MainWindow : Window
     {
-        public DispatcherTimer dispatcherTimer { get; private set; }
+        public DispatcherTimer DispatcherTimer { get; private set; }
         public int sec = Properties.Settings.Default.sec;
         public int min = Properties.Settings.Default.min;
         public int hr = Properties.Settings.Default.hr;
         TreeViewItem tviI = new TreeViewItem() { Header = "Hiter Projekt", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
         TreeViewItem tviIA = new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
-        TreeViewItem tviIB = new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
-
+        TreeViewItem tviIB = new TreeViewItem() { Header = "MainWindow.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
+        public Struktura s = new Struktura();
+        Settings cs = new Settings();
         public MainWindow()
         {
             if (Properties.Settings.Default.shrani == true)
             {
-                dispatcherTimer = new System.Windows.Threading.DispatcherTimer();
-                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-                dispatcherTimer.Interval = new TimeSpan(hr, min, sec);
-                dispatcherTimer.Start();
+                DispatcherTimer = new System.Windows.Threading.DispatcherTimer();
+                DispatcherTimer.Tick += new EventHandler(DispatcherTimerTick);
+                DispatcherTimer.Interval = new TimeSpan(hr, min, sec);
+                DispatcherTimer.Start();
             }
             InitializeComponent();
+            InitializeSettings();
             UserControl1 userControl = new UserControl1();
             userControl.OnMethodSelect += (senser, e) =>
             {
@@ -39,6 +45,10 @@ namespace IDE
                 PassThrough("FileChange", senser, e);
             };
 
+        }
+        public void InitializeSettings()
+        {
+            cs = Properties.Settings.Default.CustomSettings;
         }
         public void PassThrough(string action, object senser, EventArgs e)
         {
@@ -51,7 +61,7 @@ namespace IDE
                 Console.WriteLine(action + "\n" + senser + "\n" + e);
             }
         }
-        private void dispatcherTimer_Tick(object sender, EventArgs e)
+        private void DispatcherTimerTick(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
         }
@@ -81,8 +91,10 @@ namespace IDE
             strukturaProjekta.Items.Add(tviI);
             strukturaProjekta.Items.Add(tviIA);
             strukturaProjekta.Items.Add(tviIB);
-
-
+            s.ime = "Hiter Projekt";
+            s.programskiJezik = "c#";
+            s.ogrodje = ".NET Core";
+            s.tip = "WPF app";
         }
 
         private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
@@ -90,10 +102,17 @@ namespace IDE
             if (strukturaProjekta.Items.Count != 0)
             {
 
-                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog
+                {
+                    Filter = "XML Files (*.xml)|*.xml",
+                    FileName = s.ime
+                };
                 if (saveFileDialog.ShowDialog() == true)
                 {
-                    // do smth
+                    XmlSerializer serializer = new XmlSerializer(typeof(Struktura));
+                    TextWriter writer = new StreamWriter(saveFileDialog.FileName);
+                    serializer.Serialize(writer, s);
+                    writer.Close();
                 }
                 strukturaProjekta.Items.Clear();
             }
@@ -102,7 +121,7 @@ namespace IDE
 
         }
 
-        private void strukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
+        private void StrukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         {
             listView.Items.Clear();
             txtEditor.Document.Blocks.Clear();
@@ -163,7 +182,7 @@ namespace IDE
                 strukturaProjekta.Items.Remove(strukturaProjekta.SelectedItem);
         }
 
-        private void listView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        private void ListView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
             var item = (sender as ListView).SelectedItem;
             if (item != null)
@@ -181,15 +200,58 @@ namespace IDE
             }
         }
 
-       
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog o = new OpenFileDialog
+            {
+                Filter = "XML Files (*.xml)|*.xml"
+            };
+            if (o.ShowDialog() == true)
+            {
+                XmlSerializer deserializer = new XmlSerializer(typeof(Struktura));
+                TextReader reader = new StreamReader(o.FileName);
+                s = (Struktura)deserializer.Deserialize(reader);
+                reader.Close();
+                strukturaProjekta.Items.Add(new TreeViewItem() { Header = s.ime, HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                if (s.programskiJezik != null && s.tip != null & s.ogrodje != null)
+                {
+                    if (s.programskiJezik.ToLower() == "c++")
+                    {
+
+                        if (s.tip.ToLower() == "console app")
+                        {
+                            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+
+                        }
+
+                    }
+                    else if (s.programskiJezik.ToLower() == "c#")
+                    {
+                        if (s.tip.ToLower() == "wpf app")
+                        {
+                            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "MainWindow.xaml", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Settings.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+                        }
+
+                        else if (s.tip.ToLower() == "console app")
+                        {
+                            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
+
+                        }
+                    }
+                }
+                Console.WriteLine(s);
+            }
+        }
+
     }
 
-}
+    public class MyItem
+    {
+        public int Id { get; set; }
 
-public class MyItem
-{
-    public int Id { get; set; }
-
-    public string Metoda { get; set; }
+        public string Metoda { get; set; }
+    }
 }
 

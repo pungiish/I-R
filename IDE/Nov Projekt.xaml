@@ -8,7 +8,7 @@
         Title="Nov_Projekt" Height="450" Width="800">
     <Grid>
         <StackPanel Margin="10">
-            <TextBox Name="txtBox" DockPanel.Dock="Top" Text="Vnesi ime projekta."></TextBox>
+            <TextBox Name="txtBox" DockPanel.Dock="Top" Text="Vnesi ime projekta"></TextBox>
             <ComboBox ItemsSource="{Binding programskiJezik}" Name="programskiJezik"  SelectionChanged="jeziki_SelectionChanged">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
