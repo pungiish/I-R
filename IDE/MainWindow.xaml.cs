@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using WpfControlLibrary1;
@@ -15,6 +16,7 @@ namespace IDE
     /// </summary>
     public partial class MainWindow : Window
     {
+        Storyboard storyboard = new Storyboard();
         public DispatcherTimer DispatcherTimer { get; private set; }
         public int sec = Properties.Settings.Default.sec;
         public int min = Properties.Settings.Default.min;
@@ -36,6 +38,12 @@ namespace IDE
             InitializeComponent();
             InitializeSettings();
             UserControl1 userControl = new UserControl1();
+            DoubleAnimation da = new DoubleAnimation();
+            da.From = 0;
+            da.To = 150;
+            da.Duration = new Duration(TimeSpan.FromSeconds(2));
+            strukturaProjekta.BeginAnimation(TreeView.WidthProperty, da);
+            listView.BeginAnimation(ListView.WidthProperty, da);
             userControl.OnMethodSelect += (senser, e) =>
             {
                 PassThrough("MethodChange", senser, e);
@@ -245,6 +253,10 @@ namespace IDE
             }
         }
 
+        private void izhod_Click_1(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 
     public class MyItem

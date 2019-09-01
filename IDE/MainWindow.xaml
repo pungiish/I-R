@@ -6,7 +6,6 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid Name="grid1">
- 
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel Width="auto">
@@ -18,7 +17,7 @@
                             <MenuItem Header="_Shrani/Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
                             <MenuItem Header="_Dodaj_Datoteko" Click="MenuItem_Click_DodajDatoteko"  />
                             <MenuItem Header="_Odstrani_Datoteko" Click="MenuItem_Click_OdstraniDatoteko"  />
-                            <MenuItem Header="_Izhod" />
+                            <MenuItem Header="_Izhod" Name="izhod" Click="izhod_Click_1" />
                         </MenuItem>
                         <MenuItem Header="_Pogled" />
                         <MenuItem Header="_Orodja">
@@ -41,7 +40,7 @@
                             <Button>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Slike/play.png" Width="15"/>
-                                    <TextBlock Text=" Start" FontSize="10" />
+                                    <TextBlock Text="start"  FontSize="10"/>
                                 </StackPanel>
                             </Button>
                         </ToolBar>
@@ -51,11 +50,11 @@
             <DockPanel>
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="150" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="100" />
+                        <ColumnDefinition Width="150" />
                     </Grid.ColumnDefinitions>
                     <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="StrukturaProjekta_SelectedItemChanged" Grid.Column="0"/>
                     <GridSplitter Width="5" Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ></GridSplitter>
