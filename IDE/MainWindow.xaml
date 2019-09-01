@@ -54,19 +54,14 @@
                         <ColumnDefinition Width="100" />
                         <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="5" />
                         <ColumnDefinition Width="100" />
-
                     </Grid.ColumnDefinitions>
-                        <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="StrukturaProjekta_SelectedItemChanged"/>
+                    <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="StrukturaProjekta_SelectedItemChanged" Grid.Column="0"/>
                     <GridSplitter Width="5" Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ></GridSplitter>
-                <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" Grid.Column="2"/>
-                </Grid>
-                <StatusBar DockPanel.Dock="Bottom">
-                    <StatusBarItem>
-                        <TextBlock Name="lblCursorPosition" />
-                    </StatusBarItem>
-                </StatusBar>
-                <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="ListView_PreviewMouseLeftButtonUp" Grid.Column="3">
+                    <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" Grid.Column="2"/>
+                    <GridSplitter Width="5" Grid.Column="3" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ></GridSplitter>
+                    <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="ListView_PreviewMouseLeftButtonUp" Grid.Column="4">
                     <ListView.ItemTemplate>
                         <DataTemplate>
                             <WrapPanel>
@@ -79,6 +74,7 @@
                         </DataTemplate>
                     </ListView.ItemTemplate>
                 </ListView>
+                </Grid>
             </DockPanel>
         </DockPanel>
     </Grid>
