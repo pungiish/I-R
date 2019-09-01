@@ -66,8 +66,9 @@
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="WindowsFormsIntegration" />
-    <Reference Include="WpfControlLibrary1">
-      <HintPath>..\..\WpfControlLibrary1\WpfControlLibrary1\bin\Debug\WpfControlLibrary1.dll</HintPath>
+    <Reference Include="WpfControlLibrary1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\..\..\source\repos\WpfControlLibrary1\WpfControlLibrary1\bin\Debug\WpfControlLibrary1.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -77,9 +78,6 @@
     </ApplicationDefinition>
     <Compile Include="Model\Metoda.cs" />
     <Compile Include="Settings.cs" />
-    <Compile Include="UserControl1.xaml.cs">
-      <DependentUpon>UserControl1.xaml</DependentUpon>
-    </Compile>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -98,10 +96,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Nov Projekt.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="UserControl1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
