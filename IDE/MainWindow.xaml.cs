@@ -11,6 +11,7 @@ namespace IDE
     /// </summary>
     public partial class MainWindow : Window
     {
+        public TreeView strukturaProjekta = null;
         public DispatcherTimer dispatcherTimer { get; private set; }
         public int sec = Properties.Settings.Default.sec;
         public int min = Properties.Settings.Default.min;
@@ -28,6 +29,7 @@ namespace IDE
             }
             InitializeComponent();
             UserControl1 userControl = new UserControl1();
+            strukturaProjekta = userControl.UserControlStrukturaProjekta;
             userControl.OnMethodSelect += (senser, e) =>
             {
                 PassThrough("MethodChange", senser, e);
@@ -81,22 +83,22 @@ namespace IDE
 
         }
 
-        //private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
-        //{
-        //    if (strukturaProjekta.Items.Count != 0)
-        //    {
+        private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
+        {
+            if (strukturaProjekta.Items.Count != 0)
+            {
 
-        //        Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
-        //        if (saveFileDialog.ShowDialog() == true)
-        //        {
-        //            // do smth
-        //        }
-        //        strukturaProjekta.Items.Clear();
-        //    }
+                Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
+                if (saveFileDialog.ShowDialog() == true)
+                {
+                    // do smth
+                }
+                strukturaProjekta.Items.Clear();
+            }
 
 
 
-        //}
+        }
 
         //private void strukturaProjekta_SelectedItemChanged(object sender, RoutedPropertyChangedEventArgs<object> e)
         //{
@@ -141,23 +143,23 @@ namespace IDE
         //    }
         //}
 
-        //private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
-        //{
-        //    strukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
+        private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
+        {
+            strukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
 
 
-        //}
+        }
 
-        //private void MenuItem_Click_OdstraniDatoteko(object sender, RoutedEventArgs e)
-        //{
-        //    if (strukturaProjekta.SelectedItem == null)
-        //    {
-        //        System.Windows.MessageBox.Show($"There is no selected item!");
+        private void MenuItem_Click_OdstraniDatoteko(object sender, RoutedEventArgs e)
+        {
+            if (strukturaProjekta.SelectedItem == null)
+            {
+                System.Windows.MessageBox.Show($"There is no selected item!");
 
-        //    }
-        //    else
-        //        strukturaProjekta.Items.Remove(strukturaProjekta.SelectedItem);
-        //}
+            }
+            else
+                strukturaProjekta.Items.Remove(strukturaProjekta.SelectedItem);
+        }
 
         //private void listView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         //{
@@ -177,7 +179,7 @@ namespace IDE
         //    }
         //}
 
-       
+
     }
 
 }

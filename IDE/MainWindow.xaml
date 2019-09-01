@@ -48,8 +48,7 @@
                     </ToolBarTray>
                 </DockPanel>
             </StackPanel>
-                <!-- Listview And Treeview UserControl-->
-               
+            <UserControl></UserControl>
         </DockPanel>
     </Grid>
 </Window>
