@@ -84,7 +84,7 @@ namespace IDE
 
         private void Cancel(object sender, RoutedEventArgs e)
         {
-
+            Close();
         }
     }
 }

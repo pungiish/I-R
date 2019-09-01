@@ -2,6 +2,7 @@ using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Threading;
+using WpfControlLibrary1;
 
 namespace IDE
 {
@@ -28,7 +29,27 @@ namespace IDE
                 dispatcherTimer.Start();
             }
             InitializeComponent();
+            UserControl1 userControl = new UserControl1();
+            userControl.OnMethodSelect += (senser, e) =>
+            {
+                PassThrough("MethodChange", senser, e);
+            };
+            userControl.OnFileSelect += (senser, e) =>
+            {
+                PassThrough("FileChange", senser, e);
+            };
 
+        }
+        public void PassThrough(string action, object senser, EventArgs e)
+        {
+            if (action == "MethodChange")
+            {
+                Console.WriteLine(action + "\n" + senser + "\n" + e);
+            }
+            else if (action == "FileChange")
+            {
+                Console.WriteLine(action + "\n" + senser + "\n" + e);
+            }
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
