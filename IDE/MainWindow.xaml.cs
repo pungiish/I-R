@@ -87,7 +87,7 @@ namespace IDE
 
         private void MenuItem_Click_UstvariProjekt(object sender, RoutedEventArgs e)
         {
-
+            strukturaProjekta.Items.Clear();
             strukturaProjekta.Items.Add(tviI);
             strukturaProjekta.Items.Add(tviIA);
             strukturaProjekta.Items.Add(tviIB);
