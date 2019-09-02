@@ -49,7 +49,7 @@
                     </ToolBarTray>
                 </DockPanel>
             </StackPanel>
-            <control:UserControl1></control:UserControl1>
+            <control:UserControl1 x:Name="usr"></control:UserControl1>
         </DockPanel>
     </Grid>
 </Window>

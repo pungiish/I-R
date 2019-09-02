@@ -15,7 +15,9 @@ namespace IDE
         public int sec = Properties.Settings.Default.sec;
         public int min = Properties.Settings.Default.min;
         public int hr = Properties.Settings.Default.hr;
+        public string test = "RANDOMTEST";
         public UserControl1 uc;
+        public TreeView struktura;
 
         public MainWindow()
         {
@@ -27,7 +29,9 @@ namespace IDE
                 dispatcherTimer.Start();
             }
             InitializeComponent();
-            uc = new UserControl1();
+            UserControl1 uc = usr;
+            var text = uc.FindName("txtEditor") as RichTextBox;
+            struktura = uc.FindName("strukturaProjekta") as TreeView;
             uc.OnMethodSelect += (senser, e) =>
             {
                 PassThrough("MethodChange", senser, e);
@@ -36,7 +40,6 @@ namespace IDE
             {
                 PassThrough("FileChange", senser, e);
             };
-            uc.Text = "NEKRANDOMSTRINGPLSWORK";
 
         }
         public void PassThrough(string action, object senser, EventArgs e)
@@ -80,14 +83,20 @@ namespace IDE
             TreeViewItem tviI = new TreeViewItem() { Header = "Hiter Projekt", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
             TreeViewItem tviIA = new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
             TreeViewItem tviIB = new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
-            uc.UserControlStrukturaProjekta.Items.Add(tviI);
+            if(struktura != null)
+            {
+                struktura.Items.Add(tviI);
+                struktura.Items.Add(tviIA);
+                struktura.Items.Add(tviIB);
+
+            }
 
 
         }
 
         private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
         {
-            if (uc.UserControlStrukturaProjekta.Items.Count != 0)
+            if (struktura.Items.Count != 0)
             {
 
                 Microsoft.Win32.SaveFileDialog saveFileDialog = new Microsoft.Win32.SaveFileDialog();
@@ -95,7 +104,7 @@ namespace IDE
                 {
                     // do smth
                 }
-                uc.UserControlStrukturaProjekta.Items.Clear();
+                struktura.Items.Clear();
             }
 
 
@@ -147,21 +156,20 @@ namespace IDE
 
         private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
         {
-            uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
-            uc.UserControlStrukturaProjekta.UpdateLayout();
+           struktura.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
 
 
         }
 
         private void MenuItem_Click_OdstraniDatoteko(object sender, RoutedEventArgs e)
         {
-            if (uc.UserControlStrukturaProjekta.SelectedItem == null)
+            if (struktura.SelectedItem == null)
             {
                 System.Windows.MessageBox.Show($"There is no selected item!");
 
             }
             else
-                uc.UserControlStrukturaProjekta.Items.Remove(uc.UserControlStrukturaProjekta.SelectedItem);
+                struktura.Items.Remove(uc.UserControlStrukturaProjekta.SelectedItem);
         }
 
         //private void listView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
