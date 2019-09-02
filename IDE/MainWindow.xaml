@@ -3,21 +3,23 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:control="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
     <Grid Name="grid1">
+
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel Width="auto">
                     <Menu IsMainMenu="True">
                         <MenuItem Header="_Datoteka">
-                            <MenuItem Header="_Odpri Projekt" Click="MenuItem_Click"  />
+                            <MenuItem Header="_Odpri Projekt"  />
                             <MenuItem Header="_Nov Projekt" Click="MenuItem_Click_NovProjekt"  />
                             <MenuItem Header="_Hitro Ustvari Projekt" Click="MenuItem_Click_UstvariProjekt"  />
-                            <MenuItem Header="_Shrani/Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
+                            <MenuItem Header="_Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
                             <MenuItem Header="_Dodaj_Datoteko" Click="MenuItem_Click_DodajDatoteko"  />
                             <MenuItem Header="_Odstrani_Datoteko" Click="MenuItem_Click_OdstraniDatoteko"  />
-                            <MenuItem Header="_Izhod" Name="izhod" Click="izhod_Click_1" />
+                            <MenuItem Header="_Izhod" />
                         </MenuItem>
                         <MenuItem Header="_Pogled" />
                         <MenuItem Header="_Orodja">
@@ -40,41 +42,14 @@
                             <Button>
                                 <StackPanel Orientation="Horizontal">
                                     <Image Source="/Slike/play.png" Width="15"/>
-                                    <TextBlock Text="start"  FontSize="10"/>
+                                    <TextBlock Text=" Start" FontSize="10" />
                                 </StackPanel>
                             </Button>
                         </ToolBar>
                     </ToolBarTray>
                 </DockPanel>
             </StackPanel>
-            <DockPanel>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="150" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="5" />
-                        <ColumnDefinition Width="150" />
-                    </Grid.ColumnDefinitions>
-                    <TreeView  Name="strukturaProjekta" DockPanel.Dock="Left" SelectedItemChanged="StrukturaProjekta_SelectedItemChanged" Grid.Column="0"/>
-                    <GridSplitter Width="5" Grid.Column="1" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ></GridSplitter>
-                    <RichTextBox AcceptsReturn="True" AcceptsTab="True" Name="txtEditor" Grid.Column="2"/>
-                    <GridSplitter Width="5" Grid.Column="3" ResizeDirection="Columns" ResizeBehavior="PreviousAndNext" ></GridSplitter>
-                    <ListView Margin="10" x:Name="listView" DockPanel.Dock="Right" PreviewMouseLeftButtonUp="ListView_PreviewMouseLeftButtonUp" Grid.Column="4">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <WrapPanel>
-                                <TextBlock Text="ID: " />
-                                <TextBlock Text="{Binding Id}" FontWeight="Bold" />
-                                <TextBlock Text=", "/>
-                                <TextBlock Text="Metoda: " />
-                                <TextBlock Text="{Binding Metoda}" FontWeight="Bold" />
-                            </WrapPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                </Grid>
-            </DockPanel>
+            <control:UserControl1></control:UserControl1>
         </DockPanel>
     </Grid>
 </Window>
