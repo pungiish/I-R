@@ -148,6 +148,7 @@ namespace IDE
         private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
         {
             uc.UserControlStrukturaProjekta.Items.Add(new TreeViewItem() { Header = "newItem.txt" });
+            uc.UserControlStrukturaProjekta.UpdateLayout();
 
 
         }
