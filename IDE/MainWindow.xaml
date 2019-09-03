@@ -20,14 +20,14 @@
                                         <Storyboard>
                                             <StringAnimationUsingKeyFrames Storyboard.TargetName="lbl"
                                 Storyboard.TargetProperty="(Label.Content)"
-                                Duration="0:0:6" FillBehavior="HoldEnd">
+                                Duration="0:0:3" FillBehavior="HoldEnd">
                                                 <DiscreteStringKeyFrame Value="" KeyTime="0:0:0" />
-                                                <DiscreteStringKeyFrame Value="E" KeyTime="0:0:1" />
-                                                <DiscreteStringKeyFrame Value="Ed" KeyTime="0:0:2" />
-                                                <DiscreteStringKeyFrame Value="Edi" KeyTime="0:0:3" />
-                                                <DiscreteStringKeyFrame Value="Edit" KeyTime="0:0:4" />
-                                                <DiscreteStringKeyFrame Value="Edito" KeyTime="0:0:5" />
-                                                <DiscreteStringKeyFrame Value="Editor" KeyTime="0:0:6" />
+                                                <DiscreteStringKeyFrame Value="E" KeyTime="0:0:0.5" />
+                                                <DiscreteStringKeyFrame Value="Ed" KeyTime="0:0:1" />
+                                                <DiscreteStringKeyFrame Value="Edi" KeyTime="0:0:1.5" />
+                                                <DiscreteStringKeyFrame Value="Edit" KeyTime="0:0:2" />
+                                                <DiscreteStringKeyFrame Value="Edito" KeyTime="0:0:2.5" />
+                                                <DiscreteStringKeyFrame Value="Editor" KeyTime="0:0:3" />
                                             </StringAnimationUsingKeyFrames>
                                         </Storyboard>
                                     </BeginStoryboard>
@@ -62,7 +62,7 @@
                             <Ellipse.Triggers>
                                 <EventTrigger RoutedEvent="Window.Loaded">
                                     <BeginStoryboard>
-                                        <Storyboard RepeatBehavior="0:0:8">
+                                        <Storyboard RepeatBehavior="0:0:5">
                                             <DoubleAnimationUsingPath Source="Y" 
 
                           Storyboard.TargetProperty="(Canvas.Left)" 
