@@ -13,7 +13,7 @@
                 <DockPanel Width="auto">
                     <Menu IsMainMenu="True">
                         <MenuItem Header="_Datoteka">
-                            <MenuItem Header="_Odpri Projekt"  />
+                            <MenuItem Header="_Odpri Projekt" Click="MenuItem_Click" />
                             <MenuItem Header="_Nov Projekt" Click="MenuItem_Click_NovProjekt"  />
                             <MenuItem Header="_Hitro Ustvari Projekt" Click="MenuItem_Click_UstvariProjekt"  />
                             <MenuItem Header="_Zapri Projekt" Click="MenuItem_Click_ZapriProjekt"  />
@@ -49,7 +49,7 @@
                     </ToolBarTray>
                 </DockPanel>
             </StackPanel>
-            <control:UserControl1 x:Name="usr"></control:UserControl1>
+            <control:UserControl1 Name="usr"></control:UserControl1>
         </DockPanel>
     </Grid>
 </Window>

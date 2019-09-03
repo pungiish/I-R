@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using IDE.Model;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
+using System.Xml.Serialization;
 
 namespace IDE
 {
@@ -33,7 +35,7 @@ namespace IDE
         private void Save(object sender, RoutedEventArgs e)
         {
 
-
+            Struktura s = new Struktura();
             string[] files;
             string path = Directory.GetCurrentDirectory();
             files = Directory.GetFiles(path);
@@ -41,12 +43,24 @@ namespace IDE
             var jezik = (ProgramskiJezik)programskiJezik.SelectedValue;
             string tip = (string)tipi.SelectedValue;
             var ogrodje = (Ogrodje)ogrodja.SelectedValue;
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.InitialDirectory = path;
-            saveFileDialog.Filter = "XML Files (*.XML)|*.XML";
+            SaveFileDialog saveFileDialog = new SaveFileDialog
+            {
+                InitialDirectory = path,
+                Filter = "XML Files (*.XML)|*.XML",
+                FileName = fileName
+            };
             DialogResult fbd = saveFileDialog.ShowDialog();
             if (fbd == System.Windows.Forms.DialogResult.OK)
             {
+                ((MainWindow)System.Windows.Application.Current.MainWindow).s = s;
+                s.ime = fileName;
+                s.programskiJezik = jezik.Name.ToLower();
+                s.tip = tip.ToLower();
+                s.ogrodje = ogrodje.Name.ToLower();
+                XmlSerializer serializer = new XmlSerializer(typeof(Struktura));
+                TextWriter writer = new StreamWriter(saveFileDialog.FileName);
+                serializer.Serialize(writer, s);
+                writer.Close();
                 ((MainWindow)System.Windows.Application.Current.MainWindow).struktura.Items.Clear();
                 //File.WriteAllText(saveFileDialog.FileName, "Datoteka");
                 ((MainWindow)System.Windows.Application.Current.MainWindow).struktura.Items.Add(new TreeViewItem() { Header = fileName, HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch });
