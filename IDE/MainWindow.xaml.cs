@@ -1,9 +1,13 @@
 using IDE.Model;
 using Microsoft.Win32;
 using System;
+using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Xml.Serialization;
 using WpfControlLibrary1;
@@ -15,6 +19,7 @@ namespace IDE
     /// </summary>
     public partial class MainWindow : Window
     {
+        Storyboard lblStoryboard = new Storyboard();
         public DispatcherTimer dispatcherTimer { get; private set; }
         public int sec = Properties.Settings.Default.sec;
         public int min = Properties.Settings.Default.min;
@@ -22,6 +27,8 @@ namespace IDE
         public UserControl1 uc;
         public Struktura s = new Struktura();
         public TreeView struktura;
+        public List<TreeViewItem> strukturaProjekta = new List<TreeViewItem>();
+        public event EventHandler ustvariProjekt;
 
         public MainWindow()
         {
@@ -33,6 +40,7 @@ namespace IDE
                 dispatcherTimer.Start();
             }
             InitializeComponent();
+            
             UserControl1 uc = usr;
             var text = uc.FindName("txtEditor") as RichTextBox;
             struktura = uc.FindName("strukturaProjekta") as TreeView;
@@ -43,9 +51,13 @@ namespace IDE
             uc.OnFileSelect += (senser, e) =>
             {
                 PassThrough("FileChange", senser, e);
+                
+
             };
 
         }
+
+        
         public void PassThrough(string action, object senser, EventArgs e)
         {
             if (action == "MethodChange")
@@ -55,14 +67,15 @@ namespace IDE
             else if (action == "FileChange")
             {
                 Console.WriteLine(action + "\n" + senser + "\n" + e);
+                uc = (UserControl1)senser;
+                uc.UserControlStrukturaProjekta.Items.Clear();
+                uc.richText.Document.Blocks.Clear();
             }
         }
         private void dispatcherTimer_Tick(object sender, EventArgs e)
         {
             Properties.Settings.Default.Save();
         }
-
-
 
         private void Izhod_Click(object sender, RoutedEventArgs e)
         {
@@ -87,7 +100,12 @@ namespace IDE
             TreeViewItem tviI = new TreeViewItem() { Header = "Hiter Projekt", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
             TreeViewItem tviIA = new TreeViewItem() { Header = "Main.cs", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
             TreeViewItem tviIB = new TreeViewItem() { Header = "Main.cpp", HorizontalContentAlignment = System.Windows.HorizontalAlignment.Stretch };
-            if(struktura != null)
+            strukturaProjekta.Add(tviI);
+            strukturaProjekta.Add(tviIA);
+            strukturaProjekta.Add(tviIB);
+            ustvariProjekt?.Invoke(this, e);
+
+            if (struktura != null)
             {
                 struktura.Items.Add(tviI);
                 struktura.Items.Add(tviIA);

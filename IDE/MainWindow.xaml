@@ -6,34 +6,27 @@
         xmlns:control="clr-namespace:WpfControlLibrary1;assembly=WpfControlLibrary1"
         mc:Ignorable="d"
         Title="MainWindow" Height="800" Width="1200">
-   
+    <Window.Triggers>
+        <EventTrigger RoutedEvent="Canvas.Loaded">
+            <BeginStoryboard>
+                <Storyboard TargetName="txtblk" Duration="0:0:2" RepeatBehavior="Forever">
+                    <ColorAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground.Color">
+                        <DiscreteColorKeyFrame KeyTime="0:0:0" Value="Red" />
+                        <DiscreteColorKeyFrame KeyTime="0:0:1" Value="Blue" />
+                    </ColorAnimationUsingKeyFrames>
+                </Storyboard>
+            </BeginStoryboard>
+        </EventTrigger>
+    </Window.Triggers>
     <Grid Name="grid1">
         <DockPanel>
             <StackPanel DockPanel.Dock="Top">
                 <DockPanel Width="auto">
-                    
-                    <Menu IsMainMenu="True">
-                        <Label Name="lbl" Margin="10" FontSize="10" FontFamily="Verdana" Content="Editor">
-                            <Label.Triggers>
-                                <EventTrigger RoutedEvent="Window.Loaded">
-                                    <BeginStoryboard>
-                                        <Storyboard>
-                                            <StringAnimationUsingKeyFrames Storyboard.TargetName="lbl"
-                                Storyboard.TargetProperty="(Label.Content)"
-                                Duration="0:0:3" FillBehavior="HoldEnd">
-                                                <DiscreteStringKeyFrame Value="" KeyTime="0:0:0" />
-                                                <DiscreteStringKeyFrame Value="E" KeyTime="0:0:0.5" />
-                                                <DiscreteStringKeyFrame Value="Ed" KeyTime="0:0:1" />
-                                                <DiscreteStringKeyFrame Value="Edi" KeyTime="0:0:1.5" />
-                                                <DiscreteStringKeyFrame Value="Edit" KeyTime="0:0:2" />
-                                                <DiscreteStringKeyFrame Value="Edito" KeyTime="0:0:2.5" />
-                                                <DiscreteStringKeyFrame Value="Editor" KeyTime="0:0:3" />
-                                            </StringAnimationUsingKeyFrames>
-                                        </Storyboard>
-                                    </BeginStoryboard>
-                                </EventTrigger>
-                            </Label.Triggers>
-                        </Label>
+             
+
+                        <Menu IsMainMenu="True">
+                        <TextBlock Name="txtblk" Foreground="Black"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Text="EDITOR" />
                         <MenuItem Header="_Datoteka">
                             <MenuItem Header="_Odpri Projekt" Click="MenuItem_Click" />
                             <MenuItem Header="_Nov Projekt" Click="MenuItem_Click_NovProjekt"  />
