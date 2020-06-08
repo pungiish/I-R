@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.28010.2036
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDE", "IDE\IDE.csproj", "{F9F3E281-4607-49FC-8A52-C730976861BA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControlLibrary1", "..\WpfControlLibrary1\WpfControlLibrary1\WpfControlLibrary1.csproj", "{9BC4120A-5D04-4943-B8A5-7AAAE3B1EB83}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfControlLibrary1", "ICR-UControl\WpfControlLibrary1\WpfControlLibrary1.csproj", "{9BC4120A-5D04-4943-B8A5-7AAAE3B1EB83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

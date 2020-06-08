@@ -2,11 +2,9 @@ using IDE.Model;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Threading;
 using System.Xml.Serialization;
@@ -14,9 +12,6 @@ using WpfControlLibrary1;
 
 namespace IDE
 {
-    /// <summary>
-    
-    /// </summary>
     public partial class MainWindow : Window
     {
         Storyboard lblStoryboard = new Storyboard();
@@ -40,7 +35,7 @@ namespace IDE
                 dispatcherTimer.Start();
             }
             InitializeComponent();
-            
+
             UserControl1 uc = usr;
             var text = uc.FindName("txtEditor") as RichTextBox;
             struktura = uc.FindName("strukturaProjekta") as TreeView;
@@ -51,13 +46,9 @@ namespace IDE
             uc.OnFileSelect += (senser, e) =>
             {
                 PassThrough("FileChange", senser, e);
-                
-
             };
-
         }
 
-        
         public void PassThrough(string action, object senser, EventArgs e)
         {
             if (action == "MethodChange")
@@ -68,7 +59,6 @@ namespace IDE
             {
                 Console.WriteLine(action + "\n" + senser + "\n" + e);
                 uc = (UserControl1)senser;
-                uc.UserControlStrukturaProjekta.Items.Clear();
                 uc.richText.Document.Blocks.Clear();
             }
         }
@@ -110,10 +100,7 @@ namespace IDE
                 struktura.Items.Add(tviI);
                 struktura.Items.Add(tviIA);
                 struktura.Items.Add(tviIB);
-
             }
-
-
         }
 
         private void MenuItem_Click_ZapriProjekt(object sender, RoutedEventArgs e)
@@ -141,9 +128,7 @@ namespace IDE
         }
         private void MenuItem_Click_DodajDatoteko(object sender, RoutedEventArgs e)
         {
-           struktura.Items.Add(new TreeViewItem() { Header = "Main.cs" });
-
-
+            struktura.Items.Add(new TreeViewItem() { Header = "Main.cs" });
         }
 
         private void MenuItem_Click_OdstraniDatoteko(object sender, RoutedEventArgs e)
@@ -200,29 +185,9 @@ namespace IDE
                         }
                     }
                 }
-        }
+            }
 
         }
-
-        //private void listView_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        //{
-        //    var item = (sender as ListView).SelectedItem;
-        //    if (item != null)
-        //    {
-        //        txtEditor.Document.Blocks.Clear();
-        //        MyItem myItem = (MyItem)item;
-        //        if (myItem.Id == 1)
-        //        {
-        //            txtEditor.AppendText($" listView.Items.Clear(); var item = (e.NewValue as TreeViewItem);strukturaProjekta.Tag = item if (item.Items.Count == 0");
-        //        }
-        //        if (myItem.Id == 2)
-        //        {
-        //            txtEditor.AppendText($"var item = (sender as ListView).SelectedItem;" + "if (item != null)");
-        //        }
-        //    }
-        //}
-
-
     }
 
 }
